@@ -92,4 +92,11 @@ public class TablePool {
         return  Math.max(MathHelper.floor_float_int(getRandomBaseRolls() - getRandomBonusRolls(luck)), 0);
     }
 
+    public TableCondition[] getConditions() { return conditions; }
+    public TableFunction[] getFunctions() { return functions; }
+
+    public IntegerRange getBaseRolls() { return variableRolls == null ? new IntegerRange(fixedRolls, fixedRolls) : variableRolls; }
+    public FloatRange getBonusRolls() { return variableBonusRolls == null ? new FloatRange(fixedBonusRolls, fixedBonusRolls) : variableBonusRolls; }
+
+    public TableEntry[] getEntries() { return entries; }
 }
