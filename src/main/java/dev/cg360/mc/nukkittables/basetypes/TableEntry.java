@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public abstract class TableEntry {
 
-    public final int DEFAULT_LUCK = 1;
+    public final int DEFAULT_LUCK = 0;
 
     protected String type;
 
