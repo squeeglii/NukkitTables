@@ -66,7 +66,31 @@ public class TableFunctionSetCount extends TableFunction {
     }
 
     protected Optional<Integer> getAsBinomial(JsonObject data){
-        return null;
+        JsonElement nObject = data.get("n");
+        JsonElement pObject = data.get("p");
+        if(nObject instanceof JsonPrimitive && pObject instanceof JsonPrimitive){
+            JsonPrimitive nValue = (JsonPrimitive) nObject;
+            JsonPrimitive pValue = (JsonPrimitive) pObject;
+            if(nValue.isNumber() && pValue.isNumber()){
+                int n = nValue.getAsInt();
+                float p = pValue.getAsFloat();
+
+                if(n < 1) return Optional.of(0);
+                if(p <= 0) return Optional.of(0);
+                if(p >= 1) return Optional.of(n);
+
+                Random random = new Random();
+                int tally = 0;
+                for(int i = 0; i < n; i++){
+                    if(random.nextFloat() <= p){
+                        tally++;
+                    }
+                }
+
+                return Optional.of(tally);
+            }
+        }
+        return Optional.empty();
     }
 
 }
