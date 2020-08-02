@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'dev.cg360.mc'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://repo.nukkitx.com/maven-snapshots'
+    }
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'cn.nukkit:nukkit:1.0-SNAPSHOT'
+}
