@@ -1,11 +1,10 @@
 package dev.cg360.mc.nukkittables;
 
 import cn.nukkit.item.Item;
-import dev.cg360.mc.nukkittables.basetypes.TableCondition;
-import dev.cg360.mc.nukkittables.basetypes.TableFunction;
+import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableFunction;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 
-import java.util.Optional;
 import java.util.Random;
 
 public class Utility {

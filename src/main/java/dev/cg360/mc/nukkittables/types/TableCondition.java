@@ -1,6 +1,5 @@
-package dev.cg360.mc.nukkittables.basetypes;
+package dev.cg360.mc.nukkittables.types;
 
-import cn.nukkit.item.Item;
 import com.google.gson.JsonObject;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 

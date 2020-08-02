@@ -2,13 +2,12 @@ package dev.cg360.mc.nukkittables.functions;
 
 import cn.nukkit.item.Item;
 import cn.nukkit.math.MathHelper;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
-import dev.cg360.mc.nukkittables.basetypes.TableCondition;
-import dev.cg360.mc.nukkittables.basetypes.TableFunction;
+import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableFunction;
 
 import java.util.Optional;
 import java.util.Random;
