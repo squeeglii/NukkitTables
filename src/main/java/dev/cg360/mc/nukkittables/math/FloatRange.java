@@ -25,4 +25,21 @@ public class FloatRange {
 
     public float getMin() { return min; }
     public float getMax() { return max; }
+
+    public void setMin(float min) {
+        if(this.max < min){
+            this.min = this.max;
+            this.max = min;
+        } else {
+            this.min = min;
+        }
+    }
+    public void setMax(float max) {
+        if(this.min > max){
+            this.max = this.min;
+            this.min = max;
+        } else {
+            this.max = max;
+        }
+    }
 }

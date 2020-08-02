@@ -25,4 +25,21 @@ public class IntegerRange {
 
     public int getMin() { return min; }
     public int getMax() { return max; }
+
+    public void setMin(int min) {
+        if(this.max < min){
+            this.min = this.max;
+            this.max = min;
+        } else {
+            this.min = min;
+        }
+    }
+    public void setMax(int max) {
+        if(this.min > max){
+            this.max = this.min;
+            this.min = max;
+        } else {
+            this.max = max;
+        }
+    }
 }
