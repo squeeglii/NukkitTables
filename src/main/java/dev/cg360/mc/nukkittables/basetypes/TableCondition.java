@@ -11,6 +11,7 @@ public abstract class TableCondition {
 
     public abstract boolean isConditionPassed(TableRollContext context);
 
+    public String getConditionType() { return condition; }
     public JsonElement getData() {
         return data;
     }
