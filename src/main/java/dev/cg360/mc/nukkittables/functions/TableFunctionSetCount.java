@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
+import dev.cg360.mc.nukkittables.math.IntegerRange;
 import dev.cg360.mc.nukkittables.types.TableCondition;
 import dev.cg360.mc.nukkittables.types.TableFunction;
 
@@ -46,20 +47,13 @@ public class TableFunctionSetCount extends TableFunction {
     }
 
     protected Optional<Integer> getAsUniform(JsonObject data){
-        JsonElement minimumObject = data.get("min");
-        JsonElement maximumObject = data.get("max");
-        if(minimumObject instanceof JsonPrimitive && maximumObject instanceof JsonPrimitive){
-            JsonPrimitive minimum = (JsonPrimitive) minimumObject;
-            JsonPrimitive maximum = (JsonPrimitive) maximumObject;
-            if(minimum.isNumber() && maximum.isNumber()){
-                int min = minimum.getAsInt();
-                int max = maximum.getAsInt();
-                if(min > max) return Optional.empty();
-                if(min < 0 ) min = 0;
-                if(max < 1) return Optional.of(0);
+        Optional<IntegerRange> ir = Utility.getIntegerRangeFromData(data);
+        if(ir.isPresent()) {
+            IntegerRange range = ir.get();
+            if (range.getMin() < 0) range.setMin(0);
+            if (range.getMax() < 1) return Optional.of(0);
 
-                return Optional.of(Utility.getRandomIntBetweenInclusiveBounds(min, max));
-            }
+            return Optional.of(Utility.getRandomIntBetweenInclusiveBounds(range.getMin(), range.getMax()));
         }
         return Optional.empty();
     }
