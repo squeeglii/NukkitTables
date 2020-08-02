@@ -5,7 +5,7 @@ import cn.nukkit.item.Item;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableContext;
 
-public abstract class CommonTableEntry {
+public abstract class TableEntry {
 
     public final int DEFAULT_LUCK = 1;
 
