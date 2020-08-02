@@ -25,6 +25,7 @@ public abstract class TableEntry {
     protected abstract Optional<Item> rollEntryItems();
 
     public String getType() { return type; }
+    public TableCondition[] getConditions() { return conditions; }
     public int getBaseWeight() { return weight; }
     public int getQuality() { return quality; }
 
