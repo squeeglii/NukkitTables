@@ -12,6 +12,11 @@ public class LootTable {
     protected String type;
     protected TablePool[] pools;
 
+    public LootTable(String type, TablePool... pools){
+        this.type = type.toLowerCase();
+        this.pools = pools;
+    }
+
     public Item[] rollLootTable(TableRollContext context){
         ArrayList<Item> items = new ArrayList<>();
         for(TablePool pool: pools){

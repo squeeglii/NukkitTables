@@ -24,6 +24,44 @@ public class TablePool {
 
     protected TableEntry[] entries;
 
+    public TablePool(int rolls, int bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, int bonusRolls, TableEntry... entries){
+        this(conditions, functions, entries);
+        this.fixedRolls = rolls;
+        this.fixedBonusRolls = bonusRolls;
+    }
+    public TablePool(IntegerRange rolls, int bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, int bonusRolls, TableEntry... entries){
+        this(conditions, functions, entries);
+        this.variableRolls = rolls;
+        this.fixedBonusRolls = bonusRolls;
+    }
+    public TablePool(int rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, FloatRange bonusRolls, TableEntry... entries){
+        this(conditions, functions, entries);
+        this.fixedRolls = rolls;
+        this.variableBonusRolls = bonusRolls;
+    }
+    public TablePool(IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){
+        this(conditions, functions, entries);
+        this.variableRolls = rolls;
+        this.variableBonusRolls = bonusRolls;
+    }
+
+    private TablePool(TableCondition[] conditions, TableFunction[] functions, TableEntry[] entries){
+        this.conditions = conditions;
+        this.functions = functions;
+
+        this.fixedRolls = 0;
+        this.variableRolls = new IntegerRange(0, 0);
+
+        this.fixedBonusRolls = 0;
+        this.variableBonusRolls = new FloatRange(0, 0);
+
+        this.entries = entries;
+    }
+
     protected Optional<Item> rollPoolOnce(TableRollContext context, int maxWeight, ArrayList<TableEntry> passedEntries){
         int selection = maxWeight > 0 ? new Random().nextInt(maxWeight) : 0;
         int cumulativeWeightChecked = 1;
@@ -71,7 +109,6 @@ public class TablePool {
         if(variableRolls == null){
             return fixedRolls;
         } else {
-            Random random = new Random();
             return Utility.getRandomIntBetweenInclusiveBounds(variableRolls.getMin(), variableRolls.getMax());
         }
     }
