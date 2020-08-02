@@ -1,18 +1,18 @@
 package dev.cg360.mc.nukkittables.basetypes;
 
-import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 
 public abstract class TableCondition {
 
     protected String condition;
 
-    protected JsonElement data;
+    protected JsonObject data;
 
     public abstract boolean isConditionPassed(TableRollContext context);
 
     public String getConditionType() { return condition; }
-    public JsonElement getData() {
+    public JsonObject getData() {
         return data;
     }
 }
