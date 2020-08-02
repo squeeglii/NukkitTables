@@ -18,6 +18,14 @@ public abstract class TableEntry {
     protected int weight;
     protected int quality;
 
+    public TableEntry(String type, int weight, TableCondition... conditions){ this(type, weight, 1, conditions); }
+    public TableEntry(String type, int weight, int quality, TableCondition... conditions) {
+        this.type = type.toLowerCase();
+        this.conditions = conditions;
+        this.weight = weight;
+        this.quality = quality;
+    }
+
     public final Optional<Item> rollEntry(TableRollContext context){
         return Utility.compileConditions(conditions, context) ? rollEntryItems() : Optional.empty();
     }
