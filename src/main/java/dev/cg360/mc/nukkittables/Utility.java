@@ -26,6 +26,8 @@ public class Utility {
     }
 
     public static int getRandomIntBetweenInclusiveBounds(int min, int max){
+        if(min == max) return min;
+
         int upperRandomBound = (max - min) + 1;
         return new Random().nextInt(upperRandomBound) + min;
     }
