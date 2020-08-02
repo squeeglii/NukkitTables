@@ -5,6 +5,8 @@ import cn.nukkit.item.Item;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableContext;
 
+import java.util.Optional;
+
 public abstract class TableEntry {
 
     public final int DEFAULT_LUCK = 1;
@@ -16,11 +18,11 @@ public abstract class TableEntry {
     protected int weight;
     protected int quality;
 
-    public final Item rollEntry(TableContext context){
-        return Utility.compileConditions(conditions, context) ? rollEntryItems() : new BlockAir().toItem();
+    public final Optional<Item> rollEntry(TableContext context){
+        return Utility.compileConditions(conditions, context) ? rollEntryItems() : Optional.empty();
     }
 
-    protected abstract Item rollEntryItems();
+    protected abstract Optional<Item> rollEntryItems();
 
     public String getType() { return type; }
     public int getBaseWeight() { return weight; }
