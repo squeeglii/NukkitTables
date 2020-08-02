@@ -6,8 +6,14 @@ public class IntegerRange {
     protected int max;
 
     public IntegerRange (int min, int max){
-        this.min = min;
-        this.max = max;
+        if(min <= max) {
+            this.min = min;
+            this.max = max;
+        } else {
+            //Inverse for if someone has them the wrong way round.
+            this.min = max;
+            this.max = min;
+        }
     }
 
     public boolean isWithinRange(int value){ return isWithinRange(value, true, true); }

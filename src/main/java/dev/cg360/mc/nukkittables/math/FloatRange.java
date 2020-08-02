@@ -6,8 +6,14 @@ public class FloatRange {
     protected float max;
 
     public FloatRange (float min, float max){
-        this.min = min;
-        this.max = max;
+        if(min <= max) {
+            this.min = min;
+            this.max = max;
+        } else {
+            //Inverse for if someone has them the wrong way round.
+            this.min = max;
+            this.max = min;
+        }
     }
 
     public boolean isWithinRange(float value){ return isWithinRange(value, true, true); }
