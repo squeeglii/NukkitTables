@@ -6,6 +6,7 @@ import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.math.FloatRange;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
+import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
 import java.util.ArrayList;
 import java.util.Optional;

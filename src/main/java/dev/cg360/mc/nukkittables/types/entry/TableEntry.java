@@ -1,8 +1,9 @@
-package dev.cg360.mc.nukkittables.types;
+package dev.cg360.mc.nukkittables.types.entry;
 
 import cn.nukkit.item.Item;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
+import dev.cg360.mc.nukkittables.types.TableCondition;
 
 import java.util.Optional;
 
