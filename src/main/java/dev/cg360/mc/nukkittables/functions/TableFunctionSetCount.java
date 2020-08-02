@@ -21,7 +21,7 @@ public class TableFunctionSetCount extends TableFunction {
 
     @Override
     protected Item applyFunctionToItem(Item item) {
-        getCount(data).ifPresent(count -> item.setCount(MathHelper.clamp(count,1, 64)));
+        getCount(data).ifPresent(count -> item.setCount(MathHelper.clamp(count,0, 64)));
         return item;
     }
 
@@ -55,8 +55,9 @@ public class TableFunctionSetCount extends TableFunction {
             if(minimum.isNumber() && maximum.isNumber()){
                 int min = minimum.getAsInt();
                 int max = maximum.getAsInt();
-                if(min < 1 || max < 1) return Optional.empty();
                 if(min > max) return Optional.empty();
+                if(min < 0 ) min = 0;
+                if(max < 1) return Optional.of(0);
 
                 return Optional.of(Utility.getRandomIntBetweenInclusiveBounds(min, max));
             }
