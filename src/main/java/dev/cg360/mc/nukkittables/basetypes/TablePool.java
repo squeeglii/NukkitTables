@@ -72,8 +72,7 @@ public class TablePool {
             return fixedRolls;
         } else {
             Random random = new Random();
-            int upperRandomBound = (variableRolls.getMax() - variableRolls.getMin()) + 1;
-            return random.nextInt(upperRandomBound) + variableRolls.getMin();
+            return Utility.getRandomIntBetweenInclusiveBounds(variableRolls.getMin(), variableRolls.getMax());
         }
     }
 
