@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public abstract class TableEntry {
 
-    public final int DEFAULT_LUCK = 0;
+    public final float DEFAULT_LUCK = 0;
 
     protected String type;
 
@@ -30,7 +30,7 @@ public abstract class TableEntry {
     public int getQuality() { return quality; }
 
     public int getModifiedWeight(){ return getModifiedWeight(DEFAULT_LUCK); }
-    public int getModifiedWeight(int luck){
+    public int getModifiedWeight(float luck){
         return (int) Math.floor(weight + (quality * luck));
     }
 
