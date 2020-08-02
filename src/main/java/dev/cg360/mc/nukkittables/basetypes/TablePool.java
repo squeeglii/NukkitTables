@@ -3,7 +3,7 @@ package dev.cg360.mc.nukkittables.basetypes;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.MathHelper;
 import dev.cg360.mc.nukkittables.Utility;
-import dev.cg360.mc.nukkittables.context.TableContext;
+import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.math.FloatRange;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
 
@@ -24,7 +24,7 @@ public class TablePool {
 
     protected TableEntry[] entries;
 
-    protected Optional<Item> rollPoolOnce(TableContext context, int maxWeight, ArrayList<TableEntry> passedEntries){
+    protected Optional<Item> rollPoolOnce(TableRollContext context, int maxWeight, ArrayList<TableEntry> passedEntries){
         int selection = maxWeight > 0 ? new Random().nextInt(maxWeight) : 0;
         int cumulativeWeightChecked = 1;
         for(TableEntry entry: passedEntries){
@@ -37,7 +37,7 @@ public class TablePool {
         return Optional.empty();
     }
 
-    public Item[] rollPool(TableContext context){
+    public Item[] rollPool(TableRollContext context){
         if(Utility.compileConditions(conditions, context)) {
             ArrayList<TableEntry> passedEntries = getPassedEntries(context);
             int maxWeight = 0;
@@ -59,7 +59,7 @@ public class TablePool {
         return new Item[0];
     }
 
-    protected ArrayList<TableEntry> getPassedEntries(TableContext context){
+    protected ArrayList<TableEntry> getPassedEntries(TableRollContext context){
         ArrayList<TableEntry> passedEntries = new ArrayList<>();
         for(TableEntry entry : entries){
             if(Utility.compileConditions(entry.getConditions(), context)) passedEntries.add(entry);

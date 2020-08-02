@@ -1,7 +1,7 @@
 package dev.cg360.mc.nukkittables.basetypes;
 
 import com.google.gson.JsonElement;
-import dev.cg360.mc.nukkittables.context.TableContext;
+import dev.cg360.mc.nukkittables.context.TableRollContext;
 
 public abstract class TableCondition {
 
@@ -9,7 +9,7 @@ public abstract class TableCondition {
 
     protected JsonElement data;
 
-    public abstract boolean isConditionPassed(TableContext context);
+    public abstract boolean isConditionPassed(TableRollContext context);
 
     public JsonElement getData() {
         return data;

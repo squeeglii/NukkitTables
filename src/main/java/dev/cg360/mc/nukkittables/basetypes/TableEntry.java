@@ -1,9 +1,8 @@
 package dev.cg360.mc.nukkittables.basetypes;
 
-import cn.nukkit.block.BlockAir;
 import cn.nukkit.item.Item;
 import dev.cg360.mc.nukkittables.Utility;
-import dev.cg360.mc.nukkittables.context.TableContext;
+import dev.cg360.mc.nukkittables.context.TableRollContext;
 
 import java.util.Optional;
 
@@ -18,7 +17,7 @@ public abstract class TableEntry {
     protected int weight;
     protected int quality;
 
-    public final Optional<Item> rollEntry(TableContext context){
+    public final Optional<Item> rollEntry(TableRollContext context){
         return Utility.compileConditions(conditions, context) ? rollEntryItems() : Optional.empty();
     }
 
