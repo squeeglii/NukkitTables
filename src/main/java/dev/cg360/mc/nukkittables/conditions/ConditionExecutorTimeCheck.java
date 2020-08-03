@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class ConditionExecutorTimeCheck extends TableConditionExecutor {
 
-    public ConditionExecutorTimeCheck(JsonObject data) {
+    public ConditionExecutorTimeCheck() {
         super("minecraft:time_check");
     }
 
