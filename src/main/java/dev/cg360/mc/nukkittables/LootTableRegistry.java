@@ -13,13 +13,15 @@ import java.util.HashMap;
 
 public class LootTableRegistry {
 
+    public static final LootTableRegistry INSTANCE = new LootTableRegistry();
+
     protected HashMap<String, TableConditionExecutor> conditionExecutors;
     protected HashMap<String, TableFunctionExecutor> functionExecutors;
     protected HashMap<String, Class<? extends TableEntry>> entryTypes;
 
     protected HashMap<String, LootTable> lootTables;
 
-    public LootTableRegistry (){
+    private LootTableRegistry (){
         this.conditionExecutors = new HashMap<>();
         this.functionExecutors = new HashMap<>();
         this.entryTypes = new HashMap<>();
@@ -51,6 +53,10 @@ public class LootTableRegistry {
 
     public void registerEntryType(TableEntry entryType){
         entryTypes.put(entryType.getType().toLowerCase(), entryType.getClass());
+    }
+
+    public static LootTableRegistry getRegistry(){
+        return INSTANCE;
     }
 
 }
