@@ -10,14 +10,12 @@ import java.util.Optional;
 public abstract class TableConditionExecutor {
 
     protected String condition;
-    protected JsonObject data;
 
-    public TableConditionExecutor(String conditionID, JsonObject data){
+    public TableConditionExecutor(String conditionID){
         this.condition = conditionID;
-        this.data = data;
     }
 
-    public abstract boolean isConditionPassed(TableRollContext context);
+    public abstract boolean isConditionPassed(TableRollContext context, JsonObject data);
 
     public static Optional<TableConditionExecutor> loadConditionFromJsonObject(JsonObject object){
         JsonElement conditionElement = object.get("condition");
@@ -34,7 +32,4 @@ public abstract class TableConditionExecutor {
     }
 
     public String getConditionType() { return condition; }
-    public JsonObject getData() {
-        return data;
-    }
 }
