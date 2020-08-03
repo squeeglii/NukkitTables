@@ -74,6 +74,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
             this.name = namePrimitive.getAsString();
             this.functions = funcs.toArray(new TableFunction[0]);
+            return true;
         }
 
         return false;
