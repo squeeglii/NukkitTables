@@ -15,18 +15,13 @@ public abstract class TableFunctionExecutor {
 
     protected String function;
 
-    protected JsonObject data;
-    protected TableConditionExecutor[] conditions;
 
-    public TableFunctionExecutor(String functionID, JsonObject data, TableConditionExecutor... conditions){
+    public TableFunctionExecutor(String functionID){
         this.function = functionID;
-        this.conditions = conditions;
-
-        this.data = data;
     }
 
-    public final Item applyFunction(Item item, TableRollContext context){
-        return Utility.compileConditions(conditions, context) ? applyFunctionToItem(item) : item;
+    public final Item applyFunction(Item item, TableRollContext context, JsonObject data){ //TODO: And conditions
+        return Utility.compileConditions(conditions, context) ? applyFunctionToItem(item, data) : item;
     }
 
     public static Optional<TableFunctionExecutor> loadFromJsonObject(JsonObject object){
@@ -55,9 +50,7 @@ public abstract class TableFunctionExecutor {
         return Optional.empty();
     }
 
-    protected abstract Item applyFunctionToItem(Item item);
+    protected abstract Item applyFunctionToItem(Item item, JsonObject data);
 
     public String getFunctionType() { return function; }
-    public JsonObject getData() { return data; }
-    public TableConditionExecutor[] getConditions() { return conditions; }
 }

@@ -15,12 +15,12 @@ import java.util.Random;
 
 public class FunctionExecutorSetCount extends TableFunctionExecutor {
 
-    public FunctionExecutorSetCount(JsonObject data, TableConditionExecutor... conditions) {
-        super("minecraft:set_count", data, conditions);
+    public FunctionExecutorSetCount() {
+        super("minecraft:set_count");
     }
 
     @Override
-    protected Item applyFunctionToItem(Item item) {
+    protected Item applyFunctionToItem(Item item, JsonObject data) {
         getCount(data).ifPresent(count -> item.setCount(MathHelper.clamp(count,0, 64)));
         return item;
     }
