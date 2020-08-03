@@ -79,7 +79,6 @@ public abstract class TableEntry {
         return false;
     }
 
-    protected abstract TableEntry getEmptyInstance();
     protected abstract boolean loadCustomPropertiesFromJson(JsonObject object);
 
     public String getType() { return type; }

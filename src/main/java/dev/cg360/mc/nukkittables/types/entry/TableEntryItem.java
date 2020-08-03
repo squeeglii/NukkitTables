@@ -51,11 +51,6 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     }
 
     @Override
-    protected TableEntry getEmptyInstance() {
-        return new TableEntryItem();
-    }
-
-    @Override
     protected boolean loadCustomPropertiesFromJson(JsonObject object) {
         JsonElement nameElement = object.get("name");
         JsonElement functionsElement = object.get("functions");
