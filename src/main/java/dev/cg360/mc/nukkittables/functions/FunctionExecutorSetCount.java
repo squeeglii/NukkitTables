@@ -14,10 +14,6 @@ import java.util.Random;
 
 public class FunctionExecutorSetCount extends TableFunctionExecutor {
 
-    public FunctionExecutorSetCount() {
-        super("minecraft:set_count");
-    }
-
     @Override
     protected Item applyFunctionToItem(Item item, JsonObject data) {
         getCount(data).ifPresent(count -> item.setCount(MathHelper.clamp(count,0, 64)));
@@ -83,6 +79,11 @@ public class FunctionExecutorSetCount extends TableFunctionExecutor {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public String getFunctionType() {
+        return "minecraft:set_count";
     }
 
 }

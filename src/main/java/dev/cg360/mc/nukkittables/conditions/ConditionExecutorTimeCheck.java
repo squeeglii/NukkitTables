@@ -12,10 +12,6 @@ import java.util.Optional;
 
 public class ConditionExecutorTimeCheck extends TableConditionExecutor {
 
-    public ConditionExecutorTimeCheck() {
-        super("minecraft:time_check");
-    }
-
     @Override
     public boolean isConditionPassed(TableRollContext context, JsonObject data) {
         int time = context.getOrigin().getLevel().getTime();
@@ -45,5 +41,10 @@ public class ConditionExecutorTimeCheck extends TableConditionExecutor {
         }
 
         return true;
+    }
+
+    @Override
+    public String getConditionType() {
+        return "minecraft:time_check";
     }
 }

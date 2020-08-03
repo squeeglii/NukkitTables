@@ -8,10 +8,6 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 
 public class ConditionExecutorRandomChance extends TableConditionExecutor {
 
-    public ConditionExecutorRandomChance() {
-        super("minecraft:random_chance");
-    }
-
     @Override
     public boolean isConditionPassed(TableRollContext context, JsonObject data) {
         JsonElement element = data.get("chance");
@@ -22,5 +18,10 @@ public class ConditionExecutorRandomChance extends TableConditionExecutor {
             }
         }
         return true;
+    }
+
+    @Override
+    public String getConditionType() {
+        return "minecraft:random_chance";
     }
 }

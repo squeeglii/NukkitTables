@@ -8,10 +8,6 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 
 public class ConditionExecutorWeatherCheck extends TableConditionExecutor {
 
-    public ConditionExecutorWeatherCheck() {
-        super("minecraft:weather_check");
-    }
-
     @Override
     public boolean isConditionPassed(TableRollContext context, JsonObject data) {
         JsonElement rainingElement = data.get("raining");
@@ -33,5 +29,10 @@ public class ConditionExecutorWeatherCheck extends TableConditionExecutor {
         }
 
         return true;
+    }
+
+    @Override
+    public String getConditionType() {
+        return "minecraft:weather_check";
     }
 }
