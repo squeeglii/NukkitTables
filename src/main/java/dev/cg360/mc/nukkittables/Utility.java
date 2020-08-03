@@ -9,14 +9,16 @@ import dev.cg360.mc.nukkittables.math.IntegerRange;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
+import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableFunction;
 
 import java.util.Optional;
 import java.util.Random;
 
 public class Utility {
 
-    public static boolean compileConditions(TableConditionExecutor[] conditions, TableRollContext context){
-        for(TableConditionExecutor condition: conditions){
+    public static boolean compileConditions(TableCondition[] conditions, TableRollContext context){
+        for(TableCondition condition: conditions){
             if(!condition.isConditionPassed(context)){
                 return false;
             }
@@ -24,9 +26,9 @@ public class Utility {
         return true;
     }
 
-    public static Item applyFunctions(TableFunctionExecutor[] functions, Item item, TableRollContext context){
+    public static Item applyFunctions(TableFunction[] functions, Item item, TableRollContext context){
         Item returnable = item;
-        for(TableFunctionExecutor func: functions) returnable = func.applyFunction(returnable, context);
+        for(TableFunction func: functions) returnable = func.applyFunction(returnable, context);
         return returnable;
     }
 

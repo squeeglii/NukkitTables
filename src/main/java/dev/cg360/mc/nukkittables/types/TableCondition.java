@@ -12,7 +12,7 @@ public final class TableCondition {
     protected String condition;
     protected JsonObject data;
 
-    public boolean isConditionPassed(TableRollContext context, JsonObject data){
+    public boolean isConditionPassed(TableRollContext context){
         Optional<TableConditionExecutor> pc = LootTableRegistry.get().getConditionExecutor(condition);
         if(pc.isPresent()){
             return pc.get().isConditionPassed(context, data);
