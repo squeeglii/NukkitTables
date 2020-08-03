@@ -1,6 +1,8 @@
 package dev.cg360.mc.nukkittables.types;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.LootTableRegistry;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
@@ -18,6 +20,20 @@ public final class TableCondition {
             return pc.get().isConditionPassed(context, data);
         }
         return true;
+    }
+
+    public static Optional<TableCondition> loadConditionFromJsonObject(JsonObject object){
+        JsonElement conditionElement = object.get("condition");
+
+        if(conditionElement instanceof JsonPrimitive){
+            JsonPrimitive conditionPrimitive = (JsonPrimitive) conditionElement;
+            if(conditionPrimitive.isString()){
+                String name = conditionPrimitive.getAsString();
+                // Data is JsonObject
+                //TODO: get condition from registry
+            }
+        }
+        return Optional.empty();
     }
 
     public String getCondition() { return condition; }

@@ -11,19 +11,5 @@ public abstract class TableConditionExecutor {
 
     public abstract boolean isConditionPassed(TableRollContext context, JsonObject data);
 
-    public static Optional<TableConditionExecutor> loadConditionFromJsonObject(JsonObject object){
-        JsonElement conditionElement = object.get("condition");
-
-        if(conditionElement instanceof JsonPrimitive){
-            JsonPrimitive conditionPrimitive = (JsonPrimitive) conditionElement;
-            if(conditionPrimitive.isString()){
-                String name = conditionPrimitive.getAsString();
-                // Data is JsonObject
-                //TODO: get condition from registry
-            }
-        }
-        return Optional.empty();
-    }
-
     public abstract String getConditionType();
 }

@@ -20,31 +20,5 @@ public abstract class TableFunctionExecutor {
 
     protected abstract Item applyFunctionToItem(Item item, JsonObject data);
 
-    public static Optional<TableFunctionExecutor> loadFromJsonObject(JsonObject object){
-        JsonElement functionElement = object.get("function");
-        JsonElement conditionsElement = object.get("conditions");
-
-        if(functionElement instanceof JsonPrimitive){
-            JsonPrimitive functionPrimitive = (JsonPrimitive) functionElement;
-
-            if(functionPrimitive.isString()){
-                String name = functionPrimitive.getAsString();
-                ArrayList<TableConditionExecutor> cs = new ArrayList<>();
-
-                if(conditionsElement instanceof JsonArray){
-                    for(JsonElement c: (JsonArray) conditionsElement){
-                        if(c instanceof JsonObject) {
-                            TableConditionExecutor.loadConditionFromJsonObject((JsonObject) c).ifPresent(cs::add);
-                        }
-                    }
-                }
-
-                // Data is JsonObject
-                //TODO: get condition from registry
-            }
-        }
-        return Optional.empty();
-    }
-
     public abstract String getFunctionType();
 }
