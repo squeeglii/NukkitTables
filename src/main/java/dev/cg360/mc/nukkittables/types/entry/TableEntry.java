@@ -50,7 +50,7 @@ public abstract class TableEntry {
 
     public int getModifiedWeight(){ return getModifiedWeight(DEFAULT_LUCK); }
     public int getModifiedWeight(float luck){
-        return (int) Math.floor(weight + (quality * luck));
+        return Math.max((int) Math.floor(weight + (quality * luck)), 0);
     }
 
     public void setBaseWeight(int weight) { this.weight = weight; }
