@@ -73,8 +73,7 @@ public abstract class TableEntry {
                 this.weight = primitiveWeight.getAsNumber().intValue();
                 this.quality = q;
 
-                loadCustomPropertiesFromJson(entryObject);
-                return true;
+                return loadCustomPropertiesFromJson(entryObject);
             }
         }
         return false;
