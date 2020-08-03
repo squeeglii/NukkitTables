@@ -1,11 +1,15 @@
 package dev.cg360.mc.nukkittables.types.entry;
 
 import cn.nukkit.item.Item;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.types.TableCondition;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public abstract class TableEntry {
@@ -35,9 +39,45 @@ public abstract class TableEntry {
     protected abstract Optional<Item> rollEntryItems(TableRollContext context);
 
     protected final boolean loadPropertiesFromJson(JsonObject entryObject){
-        TableEntry instance = getEmptyInstance();
+        JsonElement elementType = entryObject.get("type");
+        JsonElement elementConditions = entryObject.get("conditions");
+        JsonElement elementWeight = entryObject.get("weight");
+        JsonElement elementQuality = entryObject.get("quality");
 
-        loadCustomPropertiesFromJson(entryObject);
+        if(elementType instanceof JsonPrimitive && elementWeight instanceof JsonPrimitive){
+            JsonPrimitive primitiveType = (JsonPrimitive) elementType;
+            JsonPrimitive primitiveWeight = (JsonPrimitive) elementWeight;
+
+            if(primitiveType.isString() && primitiveWeight.isNumber()) {
+                ArrayList<TableCondition> approvedConditions = new ArrayList<>();
+                int q = 0;
+
+                if(elementConditions instanceof JsonArray){
+                    JsonArray arrayConditions = (JsonArray) elementConditions;
+                    for(JsonElement condition: arrayConditions){
+                        if(condition instanceof JsonObject){
+                            TableCondition.loadConditionFromJsonObject((JsonObject) condition).ifPresent(approvedConditions::add);
+                        }
+                    }
+                }
+
+                if(elementQuality instanceof JsonPrimitive){
+                    JsonPrimitive primitiveQuality = (JsonPrimitive) elementQuality;
+                    if(primitiveQuality.isNumber()){
+                        q = primitiveQuality.getAsNumber().intValue();
+                    }
+                }
+
+                this.type = elementType.getAsString().toLowerCase();
+                this.conditions = approvedConditions.toArray(new TableCondition[0]);
+                this.weight = primitiveWeight.getAsNumber().intValue();
+                this.quality = q;
+
+                loadCustomPropertiesFromJson(entryObject);
+                return true;
+            }
+        }
+        return false;
     }
 
     protected abstract TableEntry getEmptyInstance();
