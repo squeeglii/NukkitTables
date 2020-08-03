@@ -1,6 +1,7 @@
 package dev.cg360.mc.nukkittables.types.entry;
 
 import cn.nukkit.item.Item;
+import com.google.gson.JsonObject;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.types.TableCondition;
@@ -27,10 +28,12 @@ public abstract class TableEntry {
     }
 
     public final Optional<Item> rollEntry(TableRollContext context){
-        return Utility.compileConditions(conditions, context) ? rollEntryItems() : Optional.empty();
+        return Utility.compileConditions(conditions, context) ? rollEntryItems(context) : Optional.empty();
     }
 
-    protected abstract Optional<Item> rollEntryItems();
+    protected abstract Optional<Item> rollEntryItems(TableRollContext context);
+
+    protected abstract boolean loadCustomPropertiesFromJson(JsonObject object);
 
     public String getType() { return type; }
     public TableCondition[] getConditions() { return conditions; }
