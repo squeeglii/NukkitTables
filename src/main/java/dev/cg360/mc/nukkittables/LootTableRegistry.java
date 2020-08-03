@@ -1,5 +1,11 @@
 package dev.cg360.mc.nukkittables;
 
+import cn.nukkit.Nukkit;
+import cn.nukkit.Server;
+import cn.nukkit.plugin.PluginLogger;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import dev.cg360.mc.nukkittables.conditions.ConditionExecutorRandomChance;
 import dev.cg360.mc.nukkittables.conditions.ConditionExecutorTimeCheck;
 import dev.cg360.mc.nukkittables.conditions.ConditionExecutorWeatherCheck;
@@ -9,8 +15,13 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Optional;
 
 public class LootTableRegistry {
@@ -44,6 +55,47 @@ public class LootTableRegistry {
         this.registerFunctionExecutor(new FunctionExecutorSetCount());
     }
 
+    public void loadAllLootTablesFromDirectory(String path, boolean includeSubfolders, boolean fromDataPath){
+        File root = new File(fromDataPath ? Server.getInstance().getDataPath() + path : path);
+        if(root.exists() && root.isDirectory()){
+            try {
+                for (File file : root.listFiles()) {
+                    if(file.isDirectory() && includeSubfolders){
+                        loadAllLootTablesFromDirectory(file.getAbsolutePath(), true, false);
+                    } else {
+                        try {
+                            loadLootTableFromFile(file);
+                        } catch (Exception err){
+                            Server.getInstance().getLogger().error("Error loading loot table at: "+file.getAbsolutePath());
+                            err.printStackTrace();
+                        }
+                    }
+                }
+            } catch (Exception err){
+                Server.getInstance().getLogger().error("Error loading loot tables in: "+root.getAbsolutePath());
+                err.printStackTrace();
+            }
+        }
+    }
+
+    public boolean loadLootTableFromFile(File file) throws FileNotFoundException {
+        if(file.getName().toLowerCase().endsWith(".json")){
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String finalStr = "";
+            Iterator<String> i = reader.lines().iterator();
+            while (i.hasNext()){
+                finalStr = finalStr.concat(i.next());
+            }
+            return loadLootTableFromString(finalStr);
+        }
+        return false;
+    }
+
+    public boolean loadLootTableFromString(String jsonData) {
+        JsonElement e = JsonParser.parseString(jsonData);
+
+        return false;
+    }
 
     public void registerConditionExecutor(TableConditionExecutor condition){
         conditionExecutors.put(condition.getConditionType().toLowerCase(), condition);
