@@ -19,6 +19,7 @@ public abstract class TableEntry {
     protected int weight;
     protected int quality;
 
+    protected TableEntry() { }
     public TableEntry(String type, int weight, TableCondition... conditions){ this(type, weight, 1, conditions); }
     public TableEntry(String type, int weight, int quality, TableCondition... conditions) {
         this.type = type.toLowerCase();
@@ -33,6 +34,13 @@ public abstract class TableEntry {
 
     protected abstract Optional<Item> rollEntryItems(TableRollContext context);
 
+    protected final boolean loadPropertiesFromJson(JsonObject entryObject){
+        TableEntry instance = getEmptyInstance();
+
+        loadCustomPropertiesFromJson(entryObject);
+    }
+
+    protected abstract TableEntry getEmptyInstance();
     protected abstract boolean loadCustomPropertiesFromJson(JsonObject object);
 
     public String getType() { return type; }

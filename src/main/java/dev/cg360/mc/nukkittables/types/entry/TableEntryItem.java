@@ -19,6 +19,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     protected String name;
     protected TableFunction[] functions;
 
+    protected TableEntryItem(){ }
     public TableEntryItem(String type, String id, int weight, int quality, TableFunction[] functions, TableCondition... conditions) {
         super(type, weight, quality, conditions);
         this.name = id;
@@ -47,6 +48,11 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
         if(id < 65535 && Item.list[id] != null) return Optional.of(Item.get(id));
 
         return Optional.empty();
+    }
+
+    @Override
+    protected TableEntry getEmptyInstance() {
+        return new TableEntryItem();
     }
 
     @Override
