@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
-import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -18,14 +18,14 @@ public abstract class TableEntry {
 
     protected String type;
 
-    protected TableCondition[] conditions;
+    protected TableConditionExecutor[] conditions;
 
     protected int weight;
     protected int quality;
 
     protected TableEntry() { }
-    public TableEntry(String type, int weight, TableCondition... conditions){ this(type, weight, 1, conditions); }
-    public TableEntry(String type, int weight, int quality, TableCondition... conditions) {
+    public TableEntry(String type, int weight, TableConditionExecutor... conditions){ this(type, weight, 1, conditions); }
+    public TableEntry(String type, int weight, int quality, TableConditionExecutor... conditions) {
         this.type = type.toLowerCase();
         this.conditions = conditions;
         this.weight = weight;
@@ -49,14 +49,14 @@ public abstract class TableEntry {
             JsonPrimitive primitiveWeight = (JsonPrimitive) elementWeight;
 
             if(primitiveType.isString() && primitiveWeight.isNumber()) {
-                ArrayList<TableCondition> approvedConditions = new ArrayList<>();
+                ArrayList<TableConditionExecutor> approvedConditions = new ArrayList<>();
                 int q = 0;
 
                 if(elementConditions instanceof JsonArray){
                     JsonArray arrayConditions = (JsonArray) elementConditions;
                     for(JsonElement condition: arrayConditions){
                         if(condition instanceof JsonObject){
-                            TableCondition.loadConditionFromJsonObject((JsonObject) condition).ifPresent(approvedConditions::add);
+                            TableConditionExecutor.loadConditionFromJsonObject((JsonObject) condition).ifPresent(approvedConditions::add);
                         }
                     }
                 }
@@ -69,7 +69,7 @@ public abstract class TableEntry {
                 }
 
                 this.type = elementType.getAsString().toLowerCase();
-                this.conditions = approvedConditions.toArray(new TableCondition[0]);
+                this.conditions = approvedConditions.toArray(new TableConditionExecutor[0]);
                 this.weight = primitiveWeight.getAsNumber().intValue();
                 this.quality = q;
 
@@ -82,7 +82,7 @@ public abstract class TableEntry {
     protected abstract boolean loadCustomPropertiesFromJson(JsonObject object);
 
     public String getType() { return type; }
-    public TableCondition[] getConditions() { return conditions; }
+    public TableConditionExecutor[] getConditions() { return conditions; }
     public int getBaseWeight() { return weight; }
     public int getQuality() { return quality; }
 

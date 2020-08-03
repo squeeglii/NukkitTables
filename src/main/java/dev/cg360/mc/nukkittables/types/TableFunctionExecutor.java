@@ -11,14 +11,14 @@ import dev.cg360.mc.nukkittables.context.TableRollContext;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public abstract class TableFunction {
+public abstract class TableFunctionExecutor {
 
     protected String function;
 
     protected JsonObject data;
-    protected TableCondition[] conditions;
+    protected TableConditionExecutor[] conditions;
 
-    public TableFunction(String functionID, JsonObject data, TableCondition... conditions){
+    public TableFunctionExecutor(String functionID, JsonObject data, TableConditionExecutor... conditions){
         this.function = functionID;
         this.conditions = conditions;
 
@@ -29,7 +29,7 @@ public abstract class TableFunction {
         return Utility.compileConditions(conditions, context) ? applyFunctionToItem(item) : item;
     }
 
-    public static Optional<TableFunction> loadFromJsonObject(JsonObject object){
+    public static Optional<TableFunctionExecutor> loadFromJsonObject(JsonObject object){
         JsonElement functionElement = object.get("function");
         JsonElement conditionsElement = object.get("conditions");
 
@@ -38,12 +38,12 @@ public abstract class TableFunction {
 
             if(functionPrimitive.isString()){
                 String name = functionPrimitive.getAsString();
-                ArrayList<TableCondition> cs = new ArrayList<>();
+                ArrayList<TableConditionExecutor> cs = new ArrayList<>();
 
                 if(conditionsElement instanceof JsonArray){
                     for(JsonElement c: (JsonArray) conditionsElement){
                         if(c instanceof JsonObject) {
-                            TableCondition.loadConditionFromJsonObject((JsonObject) c).ifPresent(cs::add);
+                            TableConditionExecutor.loadConditionFromJsonObject((JsonObject) c).ifPresent(cs::add);
                         }
                     }
                 }
@@ -59,5 +59,5 @@ public abstract class TableFunction {
 
     public String getFunctionType() { return function; }
     public JsonObject getData() { return data; }
-    public TableCondition[] getConditions() { return conditions; }
+    public TableConditionExecutor[] getConditions() { return conditions; }
 }

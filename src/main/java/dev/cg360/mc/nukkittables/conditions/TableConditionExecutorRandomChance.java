@@ -4,11 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
-import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
 
-public class TableConditionRandomChance extends TableCondition {
+public class TableConditionExecutorRandomChance extends TableConditionExecutor {
 
-    public TableConditionRandomChance(JsonObject data) {
+    public TableConditionExecutorRandomChance(JsonObject data) {
         super("minecraft:random_chance", data);
     }
 

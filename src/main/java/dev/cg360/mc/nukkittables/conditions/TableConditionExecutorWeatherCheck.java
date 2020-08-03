@@ -3,16 +3,12 @@ package dev.cg360.mc.nukkittables.conditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
-import dev.cg360.mc.nukkittables.math.IntegerRange;
-import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
 
-import java.util.Optional;
+public class TableConditionExecutorWeatherCheck extends TableConditionExecutor {
 
-public class TableConditionWeatherCheck extends TableCondition {
-
-    public TableConditionWeatherCheck(JsonObject data) {
+    public TableConditionExecutorWeatherCheck(JsonObject data) {
         super("minecraft:weather_check", data);
     }
 

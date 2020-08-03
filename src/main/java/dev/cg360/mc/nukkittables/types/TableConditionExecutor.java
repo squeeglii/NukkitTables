@@ -1,27 +1,25 @@
 package dev.cg360.mc.nukkittables.types;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
-public abstract class TableCondition {
+public abstract class TableConditionExecutor {
 
     protected String condition;
     protected JsonObject data;
 
-    public TableCondition(String conditionID, JsonObject data){
+    public TableConditionExecutor(String conditionID, JsonObject data){
         this.condition = conditionID;
         this.data = data;
     }
 
     public abstract boolean isConditionPassed(TableRollContext context);
 
-    public static Optional<TableCondition> loadConditionFromJsonObject(JsonObject object){
+    public static Optional<TableConditionExecutor> loadConditionFromJsonObject(JsonObject object){
         JsonElement conditionElement = object.get("condition");
 
         if(conditionElement instanceof JsonPrimitive){

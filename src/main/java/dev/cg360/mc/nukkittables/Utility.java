@@ -6,8 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.math.FloatRange;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
-import dev.cg360.mc.nukkittables.types.TableCondition;
-import dev.cg360.mc.nukkittables.types.TableFunction;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
+import dev.cg360.mc.nukkittables.types.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 
 import java.util.Optional;
@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class Utility {
 
-    public static boolean compileConditions(TableCondition[] conditions, TableRollContext context){
-        for(TableCondition condition: conditions){
+    public static boolean compileConditions(TableConditionExecutor[] conditions, TableRollContext context){
+        for(TableConditionExecutor condition: conditions){
             if(!condition.isConditionPassed(context)){
                 return false;
             }
@@ -24,9 +24,9 @@ public class Utility {
         return true;
     }
 
-    public static Item applyFunctions(TableFunction[] functions, Item item, TableRollContext context){
+    public static Item applyFunctions(TableFunctionExecutor[] functions, Item item, TableRollContext context){
         Item returnable = item;
-        for(TableFunction func: functions) returnable = func.applyFunction(returnable, context);
+        for(TableFunctionExecutor func: functions) returnable = func.applyFunction(returnable, context);
         return returnable;
     }
 

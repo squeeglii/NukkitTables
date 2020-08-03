@@ -8,8 +8,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
-import dev.cg360.mc.nukkittables.types.TableCondition;
-import dev.cg360.mc.nukkittables.types.TableFunction;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
+import dev.cg360.mc.nukkittables.types.TableFunctionExecutor;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -17,10 +17,10 @@ import java.util.Optional;
 public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
     protected String name;
-    protected TableFunction[] functions;
+    protected TableFunctionExecutor[] functions;
 
     protected TableEntryItem(){ }
-    public TableEntryItem(String type, String id, int weight, int quality, TableFunction[] functions, TableCondition... conditions) {
+    public TableEntryItem(String type, String id, int weight, int quality, TableFunctionExecutor[] functions, TableConditionExecutor... conditions) {
         super(type, weight, quality, conditions);
         this.name = id;
         this.functions = functions;
@@ -61,17 +61,17 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
             if(!(namePrimitive.isNumber() || namePrimitive.isString())) return false;
 
-            ArrayList<TableFunction> funcs = new ArrayList<>();
+            ArrayList<TableFunctionExecutor> funcs = new ArrayList<>();
 
             for(JsonElement f: functionsArray){
                 if(f.isJsonObject()){
                     JsonObject func = (JsonObject) f;
-                    TableFunction.loadFromJsonObject(func).ifPresent(funcs::add);
+                    TableFunctionExecutor.loadFromJsonObject(func).ifPresent(funcs::add);
                 }
             }
 
             this.name = namePrimitive.getAsString();
-            this.functions = funcs.toArray(new TableFunction[0]);
+            this.functions = funcs.toArray(new TableFunctionExecutor[0]);
         }
 
         return false;
@@ -79,5 +79,5 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
     @Override
     public String getName() { return name; }
-    public TableFunction[] getFunctions() { return functions; }
+    public TableFunctionExecutor[] getFunctions() { return functions; }
 }

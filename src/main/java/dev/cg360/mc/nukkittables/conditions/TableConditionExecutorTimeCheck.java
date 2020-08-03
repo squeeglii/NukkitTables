@@ -6,13 +6,13 @@ import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
-import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
 
 import java.util.Optional;
 
-public class TableConditionTimeCheck extends TableCondition {
+public class TableConditionExecutorTimeCheck extends TableConditionExecutor {
 
-    public TableConditionTimeCheck(JsonObject data) {
+    public TableConditionExecutorTimeCheck(JsonObject data) {
         super("minecraft:time_check", data);
     }
 
