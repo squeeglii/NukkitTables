@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class TablePool {
 
-    protected TableConditionExecutor[] conditions;
-    protected TableFunctionExecutor[] functions;
+    protected TableCondition[] conditions;
+    protected TableFunction[] functions;
 
     protected int fixedRolls;
     protected IntegerRange variableRolls;
@@ -28,31 +28,31 @@ public class TablePool {
     protected TableEntry[] entries;
 
     public TablePool(int rolls, int bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
-    public TablePool(TableConditionExecutor[] conditions, TableFunctionExecutor[] functions, int rolls, int bonusRolls, TableEntry... entries){
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, int bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.fixedRolls = rolls;
         this.fixedBonusRolls = bonusRolls;
     }
     public TablePool(IntegerRange rolls, int bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
-    public TablePool(TableConditionExecutor[] conditions, TableFunctionExecutor[] functions, IntegerRange rolls, int bonusRolls, TableEntry... entries){
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, int bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.variableRolls = rolls;
         this.fixedBonusRolls = bonusRolls;
     }
     public TablePool(int rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
-    public TablePool(TableConditionExecutor[] conditions, TableFunctionExecutor[] functions, int rolls, FloatRange bonusRolls, TableEntry... entries){
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, FloatRange bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.fixedRolls = rolls;
         this.variableBonusRolls = bonusRolls;
     }
     public TablePool(IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
-    public TablePool(TableConditionExecutor[] conditions, TableFunctionExecutor[] functions, IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){
+    public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.variableRolls = rolls;
         this.variableBonusRolls = bonusRolls;
     }
 
-    private TablePool(TableConditionExecutor[] conditions, TableFunctionExecutor[] functions, TableEntry[] entries){
+    private TablePool(TableCondition[] conditions, TableFunction[] functions, TableEntry[] entries){
         this.conditions = conditions;
         this.functions = functions;
 
@@ -131,8 +131,8 @@ public class TablePool {
         return  Math.max(MathHelper.floor_float_int(getRandomBaseRolls() - getRandomBonusRolls(luck)), 0);
     }
 
-    public TableConditionExecutor[] getConditions() { return conditions; }
-    public TableFunctionExecutor[] getFunctions() { return functions; }
+    public TableCondition[] getConditions() { return conditions; }
+    public TableFunction[] getFunctions() { return functions; }
 
     public IntegerRange getBaseRolls() { return variableRolls == null ? new IntegerRange(fixedRolls, fixedRolls) : variableRolls; }
     public FloatRange getBonusRolls() { return variableBonusRolls == null ? new FloatRange(fixedBonusRolls, fixedBonusRolls) : variableBonusRolls; }
