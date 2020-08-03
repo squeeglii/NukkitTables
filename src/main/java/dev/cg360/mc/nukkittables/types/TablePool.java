@@ -27,25 +27,25 @@ public class TablePool {
 
     protected TableEntry[] entries;
 
-    public TablePool(int rolls, int bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
+    public TablePool(int rolls, int bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
     public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, int bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.fixedRolls = rolls;
         this.fixedBonusRolls = bonusRolls;
     }
-    public TablePool(IntegerRange rolls, int bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
+    public TablePool(IntegerRange rolls, int bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
     public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, int bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.variableRolls = rolls;
         this.fixedBonusRolls = bonusRolls;
     }
-    public TablePool(int rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
+    public TablePool(int rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
     public TablePool(TableCondition[] conditions, TableFunction[] functions, int rolls, FloatRange bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.fixedRolls = rolls;
         this.variableBonusRolls = bonusRolls;
     }
-    public TablePool(IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableConditionExecutor[0], new TableFunctionExecutor[0], rolls, bonusRolls, entries); }
+    public TablePool(IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){ this(new TableCondition[0], new TableFunction[0], rolls, bonusRolls, entries); }
     public TablePool(TableCondition[] conditions, TableFunction[] functions, IntegerRange rolls, FloatRange bonusRolls, TableEntry... entries){
         this(conditions, functions, entries);
         this.variableRolls = rolls;
