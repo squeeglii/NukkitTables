@@ -7,7 +7,6 @@ import dev.cg360.mc.nukkittables.functions.FunctionExecutorSetCount;
 import dev.cg360.mc.nukkittables.types.LootTable;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
-import dev.cg360.mc.nukkittables.types.TableCondition;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
 import java.util.ArrayList;

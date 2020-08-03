@@ -28,7 +28,7 @@ public class TableFunction {
         return item;
     }
 
-    public static Optional<TableFunctionExecutor> loadFromJsonObject(JsonObject object){
+    public static Optional<TableFunction> loadFromJsonObject(JsonObject object){
         JsonElement functionElement = object.get("function");
         JsonElement conditionsElement = object.get("conditions");
 
@@ -36,7 +36,6 @@ public class TableFunction {
             JsonPrimitive functionPrimitive = (JsonPrimitive) functionElement;
 
             if(functionPrimitive.isString()){
-                String name = functionPrimitive.getAsString();
                 ArrayList<TableCondition> cs = new ArrayList<>();
 
                 if(conditionsElement instanceof JsonArray){
@@ -47,8 +46,11 @@ public class TableFunction {
                     }
                 }
 
-                // Data is JsonObject
-                //TODO: get condition from registry
+                TableFunction func = new TableFunction();
+                func.function = functionPrimitive.getAsString();
+                func.conditions = cs.toArray(new TableCondition[0]);
+                func.data = object;
+                return Optional.of(func);
             }
         }
         return Optional.empty();

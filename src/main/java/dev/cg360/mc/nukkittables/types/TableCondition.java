@@ -27,10 +27,12 @@ public final class TableCondition {
 
         if(conditionElement instanceof JsonPrimitive){
             JsonPrimitive conditionPrimitive = (JsonPrimitive) conditionElement;
+
             if(conditionPrimitive.isString()){
-                String name = conditionPrimitive.getAsString();
-                // Data is JsonObject
-                //TODO: get condition from registry
+                TableCondition con = new TableCondition();
+                con.condition = conditionPrimitive.getAsString();
+                con.data = object;
+                return Optional.of(con);
             }
         }
         return Optional.empty();
