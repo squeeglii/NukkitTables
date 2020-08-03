@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
-import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
+import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 
 public class ConditionExecutorWeatherCheck extends TableConditionExecutor {
 

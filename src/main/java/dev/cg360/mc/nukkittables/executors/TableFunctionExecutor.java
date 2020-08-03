@@ -1,4 +1,4 @@
-package dev.cg360.mc.nukkittables.types;
+package dev.cg360.mc.nukkittables.executors;
 
 import cn.nukkit.item.Item;
 import com.google.gson.JsonArray;

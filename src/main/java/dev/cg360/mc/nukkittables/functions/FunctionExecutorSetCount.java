@@ -7,8 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
-import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
-import dev.cg360.mc.nukkittables.types.TableFunctionExecutor;
+import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 
 import java.util.Optional;
 import java.util.Random;

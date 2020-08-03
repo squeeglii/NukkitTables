@@ -1,4 +1,4 @@
-package dev.cg360.mc.nukkittables.types;
+package dev.cg360.mc.nukkittables.executors;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

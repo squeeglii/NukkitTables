@@ -6,7 +6,7 @@ import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.math.IntegerRange;
-import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
+import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 
 import java.util.Optional;
 
