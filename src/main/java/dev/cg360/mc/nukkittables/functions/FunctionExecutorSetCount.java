@@ -13,9 +13,9 @@ import dev.cg360.mc.nukkittables.types.TableFunctionExecutor;
 import java.util.Optional;
 import java.util.Random;
 
-public class TableFunctionExecutorSetCount extends TableFunctionExecutor {
+public class FunctionExecutorSetCount extends TableFunctionExecutor {
 
-    public TableFunctionExecutorSetCount(JsonObject data, TableConditionExecutor... conditions) {
+    public FunctionExecutorSetCount(JsonObject data, TableConditionExecutor... conditions) {
         super("minecraft:set_count", data, conditions);
     }
 

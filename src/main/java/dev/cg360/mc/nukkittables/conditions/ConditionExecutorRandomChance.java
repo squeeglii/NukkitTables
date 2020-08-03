@@ -6,14 +6,14 @@ import com.google.gson.JsonPrimitive;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.types.TableConditionExecutor;
 
-public class TableConditionExecutorRandomChance extends TableConditionExecutor {
+public class ConditionExecutorRandomChance extends TableConditionExecutor {
 
-    public TableConditionExecutorRandomChance(JsonObject data) {
-        super("minecraft:random_chance", data);
+    public ConditionExecutorRandomChance() {
+        super("minecraft:random_chance");
     }
 
     @Override
-    public boolean isConditionPassed(TableRollContext context) {
+    public boolean isConditionPassed(TableRollContext context, JsonObject data) {
         JsonElement element = data.get("chance");
         if(element instanceof JsonPrimitive){
             JsonPrimitive primitive = (JsonPrimitive) element;
