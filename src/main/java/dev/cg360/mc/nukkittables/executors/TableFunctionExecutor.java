@@ -18,6 +18,8 @@ public abstract class TableFunctionExecutor {
         return Utility.compileConditions(conditions, context) ? applyFunctionToItem(item, data) : item;
     }
 
+    protected abstract Item applyFunctionToItem(Item item, JsonObject data);
+
     public static Optional<TableFunctionExecutor> loadFromJsonObject(JsonObject object){
         JsonElement functionElement = object.get("function");
         JsonElement conditionsElement = object.get("conditions");
@@ -43,8 +45,6 @@ public abstract class TableFunctionExecutor {
         }
         return Optional.empty();
     }
-
-    protected abstract Item applyFunctionToItem(Item item, JsonObject data);
 
     public abstract String getFunctionType();
 }

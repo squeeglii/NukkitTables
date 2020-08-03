@@ -17,7 +17,7 @@ public final class TableCondition {
         if(pc.isPresent()){
             return pc.get().isConditionPassed(context, data);
         }
-        return false;
+        return true;
     }
 
     public String getCondition() { return condition; }
