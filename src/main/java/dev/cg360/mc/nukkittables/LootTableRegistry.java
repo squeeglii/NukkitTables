@@ -8,6 +8,7 @@ import dev.cg360.mc.nukkittables.conditions.ConditionExecutorRandomChance;
 import dev.cg360.mc.nukkittables.conditions.ConditionExecutorTimeCheck;
 import dev.cg360.mc.nukkittables.conditions.ConditionExecutorWeatherCheck;
 import dev.cg360.mc.nukkittables.functions.FunctionExecutorSetCount;
+import dev.cg360.mc.nukkittables.functions.FunctionExecutorSetMeta;
 import dev.cg360.mc.nukkittables.types.LootTable;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
@@ -45,13 +46,20 @@ public class LootTableRegistry {
     }
 
     public void registerDefaultConditions(){
+        // minecraft namespace
         this.registerConditionExecutor(new ConditionExecutorRandomChance());
         this.registerConditionExecutor(new ConditionExecutorTimeCheck());
         this.registerConditionExecutor(new ConditionExecutorWeatherCheck());
+
+        // nukkit namespace
     }
 
     public void registerDefaultFunctions(){
+        // minecraft namespace
         this.registerFunctionExecutor(new FunctionExecutorSetCount());
+
+        // nukkit namespace
+        this.registerFunctionExecutor(new FunctionExecutorSetMeta());
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
