@@ -4,9 +4,7 @@ import cn.nukkit.Nukkit;
 import cn.nukkit.Server;
 import cn.nukkit.plugin.PluginLogger;
 import com.google.gson.*;
-import dev.cg360.mc.nukkittables.conditions.ConditionExecutorRandomChance;
-import dev.cg360.mc.nukkittables.conditions.ConditionExecutorTimeCheck;
-import dev.cg360.mc.nukkittables.conditions.ConditionExecutorWeatherCheck;
+import dev.cg360.mc.nukkittables.conditions.*;
 import dev.cg360.mc.nukkittables.functions.FunctionExecutorSetCount;
 import dev.cg360.mc.nukkittables.functions.FunctionExecutorSetMeta;
 import dev.cg360.mc.nukkittables.types.LootTable;
@@ -47,11 +45,14 @@ public class LootTableRegistry {
 
     public void registerDefaultConditions(){
         // minecraft namespace
+        this.registerConditionExecutor(new ConditionExecutorAlternative());
+        this.registerConditionExecutor(new ConditionExecutorInverted());
         this.registerConditionExecutor(new ConditionExecutorRandomChance());
         this.registerConditionExecutor(new ConditionExecutorTimeCheck());
         this.registerConditionExecutor(new ConditionExecutorWeatherCheck());
 
         // nukkit namespace
+        this.registerConditionExecutor(new ConditionExecutorPluginEnabled());
     }
 
     public void registerDefaultFunctions(){
