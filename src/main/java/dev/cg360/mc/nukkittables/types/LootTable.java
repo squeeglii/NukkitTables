@@ -20,7 +20,7 @@ public class LootTable {
     protected TablePool[] pools;
 
     public LootTable(String type, TablePool... pools){
-        this.type = type.toLowerCase();
+        this.type = type.toLowerCase().trim();
         this.pools = pools;
     }
 
@@ -39,7 +39,7 @@ public class LootTable {
 
         if(rootElement instanceof JsonObject){
             JsonObject rootObject = (JsonObject) rootElement;
-            JsonElement poolTypeElement = rootObject.get("type");
+            JsonElement tableTypeElement = rootObject.get("type");
             JsonElement poolsElement = rootObject.get("pools");
 
             if(poolsElement instanceof JsonArray){
@@ -165,8 +165,17 @@ public class LootTable {
                     }
                 }
 
+                String tableType = "generic";
+                if(tableTypeElement instanceof JsonPrimitive){
+                    JsonPrimitive typePrimitive = (JsonPrimitive) tableTypeElement;
 
+                    if(typePrimitive.isString()) {
+                        tableType = typePrimitive.getAsString();
+                    }
+                }
 
+                LootTable table = new LootTable(tableType, pools.toArray(new TablePool[0]));
+                return Optional.of(table);
             }
         }
         //TODO:
