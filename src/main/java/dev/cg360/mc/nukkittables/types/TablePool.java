@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-public class TablePool {
+public final class TablePool {
 
     protected TableCondition[] conditions;
     protected TableFunction[] functions;
@@ -52,7 +52,7 @@ public class TablePool {
         this.variableBonusRolls = bonusRolls;
     }
 
-    private TablePool(TableCondition[] conditions, TableFunction[] functions, TableEntry[] entries){
+    protected TablePool(TableCondition[] conditions, TableFunction[] functions, TableEntry[] entries){
         this.conditions = conditions;
         this.functions = functions;
 
