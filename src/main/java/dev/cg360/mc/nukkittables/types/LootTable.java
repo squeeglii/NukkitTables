@@ -1,7 +1,9 @@
 package dev.cg360.mc.nukkittables.types;
 
+import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import com.google.gson.*;
+import dev.cg360.mc.nukkittables.LootTableRegistry;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.math.FloatRange;
@@ -37,7 +39,7 @@ public class LootTable {
 
         if(rootElement instanceof JsonObject){
             JsonObject rootObject = (JsonObject) rootElement;
-            JsonElement typeElement = rootObject.get("type");
+            JsonElement poolTypeElement = rootObject.get("type");
             JsonElement poolsElement = rootObject.get("pools");
 
             if(poolsElement instanceof JsonArray){
@@ -57,8 +59,33 @@ public class LootTable {
                         if(entriesElement instanceof JsonArray){
                             JsonArray entriesArray = (JsonArray) entriesElement;
                             ArrayList<TableEntry> entries = new ArrayList<>();
-                            for(JsonElement entryElement: entriesArray){
 
+                            for(JsonElement entryElement: entriesArray){
+                                if(entryElement instanceof JsonObject){
+                                    JsonObject entryObject = (JsonObject) entryElement;
+                                    JsonElement typeElement = entryObject.get("type");
+
+                                    if (typeElement instanceof JsonPrimitive){
+                                        JsonPrimitive typePrimitive = (JsonPrimitive) typeElement;
+
+                                        if(typePrimitive.isString()){
+                                            String entryType = typePrimitive.getAsString();
+                                            Optional<Class<? extends TableEntry>> pc = LootTableRegistry.get().getEntryTypeClass(entryType.toLowerCase().trim());
+
+                                            if(pc.isPresent()){
+                                                Class<? extends TableEntry> entryClass = pc.get();
+                                                try{
+                                                    TableEntry e = entryClass.newInstance();
+                                                    if(e.loadPropertiesFromJson(entryObject)) entries.add(e);
+
+                                                } catch (Exception err){
+                                                    Server.getInstance().getLogger().warning(String.format("Error loading type [%s] in a lootTable. Badly coded? Skipping entry.", entryType));
+                                                    err.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
 
                             if(entriesArray.size() > 0){
@@ -137,6 +164,9 @@ public class LootTable {
                         }
                     }
                 }
+
+
+
             }
         }
         //TODO:

@@ -39,7 +39,7 @@ public abstract class TableEntry {
 
     protected abstract Optional<Item> rollEntryItems(TableRollContext context);
 
-    protected final boolean loadPropertiesFromJson(JsonObject entryObject){
+    public final boolean loadPropertiesFromJson(JsonObject entryObject){
         JsonElement elementType = entryObject.get("type");
         JsonElement elementConditions = entryObject.get("conditions");
         JsonElement elementWeight = entryObject.get("weight");
