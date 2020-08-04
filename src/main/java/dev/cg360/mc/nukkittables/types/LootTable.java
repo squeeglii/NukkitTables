@@ -1,12 +1,11 @@
 package dev.cg360.mc.nukkittables.types;
 
 import cn.nukkit.item.Item;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
+import dev.cg360.mc.nukkittables.math.FloatRange;
+import dev.cg360.mc.nukkittables.math.IntegerRange;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
 import java.util.ArrayList;
@@ -90,6 +89,49 @@ public class LootTable {
                                         entries.toArray(new TableEntry[0])
                                 );
 
+                                if(bonusRollsElement instanceof JsonPrimitive){
+                                    JsonPrimitive bonusRollsPrimitive = (JsonPrimitive) bonusRollsElement;
+
+                                    if(bonusRollsPrimitive.isNumber()){
+                                        pool.fixedBonusRolls = bonusRollsPrimitive.getAsFloat();
+                                    }
+                                } else if (bonusRollsElement instanceof JsonObject){
+                                    JsonObject bonusRollsObject = (JsonObject) bonusRollsElement;
+                                    JsonElement minElement = bonusRollsObject.get("min");
+                                    JsonElement maxElement = bonusRollsObject.get("max");
+
+                                    if(minElement instanceof JsonPrimitive && maxElement instanceof JsonPrimitive){
+                                        JsonPrimitive minPrimitive = (JsonPrimitive) minElement;
+                                        JsonPrimitive maxPrimitive = (JsonPrimitive) maxElement;
+
+                                        if(minPrimitive.isNumber() && maxPrimitive.isNumber()){
+                                            pool.variableBonusRolls = new FloatRange(minPrimitive.getAsFloat(), maxPrimitive.getAsFloat());
+                                        }
+                                    }
+                                }
+
+                                if(rollsElement instanceof JsonPrimitive){
+                                    JsonPrimitive rollsPrimitive = (JsonPrimitive) rollsElement;
+
+                                    if(rollsPrimitive.isNumber()){
+                                        pool.fixedRolls = rollsPrimitive.getAsInt();
+                                        pools.add(pool);
+                                    }
+                                } else if (rollsElement instanceof JsonObject){
+                                    JsonObject rollsObject = (JsonObject) rollsElement;
+                                    JsonElement minElement = rollsObject.get("min");
+                                    JsonElement maxElement = rollsObject.get("max");
+
+                                    if(minElement instanceof JsonPrimitive && maxElement instanceof JsonPrimitive){
+                                        JsonPrimitive minPrimitive = (JsonPrimitive) minElement;
+                                        JsonPrimitive maxPrimitive = (JsonPrimitive) maxElement;
+
+                                        if(minPrimitive.isNumber() && maxPrimitive.isNumber()){
+                                            pool.variableRolls = new IntegerRange(minPrimitive.getAsInt(), maxPrimitive.getAsInt());
+                                            pools.add(pool);
+                                        }
+                                    }
+                                }
 
                             }
                         }

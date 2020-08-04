@@ -57,10 +57,10 @@ public final class TablePool {
         this.functions = functions;
 
         this.fixedRolls = 0;
-        this.variableRolls = new IntegerRange(0, 0);
+        this.variableRolls = null;
 
         this.fixedBonusRolls = 0;
-        this.variableBonusRolls = new FloatRange(0, 0);
+        this.variableBonusRolls = null;
 
         this.entries = entries;
     }
