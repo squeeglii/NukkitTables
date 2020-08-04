@@ -18,7 +18,7 @@ public class ConditionExecutorInverted extends TableConditionExecutor {
             JsonObject conditionObject = (JsonObject) conditionElement;
             Optional<TableCondition> pc = TableCondition.loadConditionFromJsonObject(conditionObject);
             if(pc.isPresent()){
-                return pc.get().isConditionPassed(context);
+                return !pc.get().isConditionPassed(context);
             }
         }
         return true;
