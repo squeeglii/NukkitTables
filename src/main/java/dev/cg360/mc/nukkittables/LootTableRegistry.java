@@ -69,17 +69,15 @@ public class LootTableRegistry {
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
-        String tablePathName = name == null ? "" : name;
-        File root = new File(Server.getInstance().getDataPath() + "loottables/" + tablePathName);
+        File root = new File(Server.getInstance().getDataPath() + "loottables/" + name);
         if(root.exists() && root.isDirectory()){
             try {
                 for (File file : root.listFiles()) {
-                    String pre = tablePathName.equals("") ? tablePathName + "/" : "";
                     if(file.isDirectory() && includeSubfolders){
-                        loadAllLootTablesFromStorage(pre, true);
+                        loadAllLootTablesFromStorage(name+"/"+file.getName(), true);
                     } else {
                         try {
-                            registerStoredLootTable(pre +file.getName());
+                            registerStoredLootTable(name+"/"+file.getName());
                         } catch (Exception err){
                             Server.getInstance().getLogger().error("Error loading loot table at: "+file.getAbsolutePath());
                             err.printStackTrace();
@@ -102,7 +100,7 @@ public class LootTableRegistry {
             while (i.hasNext()){
                 finalStr = finalStr.concat(i.next());
             }
-            return registerLootTableFromString(name.toLowerCase().substring(0, name.length() - 6), finalStr);
+            return registerLootTableFromString(name.toLowerCase().substring((name.startsWith("/") ? 1 : 0), name.length() - 6), finalStr);
         }
         return false;
     }
