@@ -35,7 +35,7 @@ public class LootTable {
     }
 
     public static Optional<LootTable> createLootTableFromString(String jsonData) {
-        JsonElement rootElement = JsonParser.parseString(jsonData);
+        JsonElement rootElement = new JsonParser().parse(jsonData);
 
         if(rootElement instanceof JsonObject){
             JsonObject rootObject = (JsonObject) rootElement;
