@@ -40,6 +40,7 @@ public class LootTableRegistry {
 
         this.lootTables = new HashMap<>();
 
+        this.registerDefaultTypes();
         this.registerDefaultConditions();
         this.registerDefaultFunctions();
     }
