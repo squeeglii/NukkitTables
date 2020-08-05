@@ -115,11 +115,21 @@ public class LootTableRegistry {
     }
 
     public void registerConditionExecutor(TableConditionExecutor condition){
-        conditionExecutors.put(condition.getConditionType().toLowerCase(), condition);
+        String originalID = condition.getConditionType().toLowerCase();
+        conditionExecutors.put(originalID, condition);
+        if(originalID.startsWith("minecraft:")){
+            String shortenedID = originalID.substring(10);
+            conditionExecutors.put(shortenedID, condition);
+        }
     }
 
     public void registerFunctionExecutor(TableFunctionExecutor function){
-        functionExecutors.put(function.getFunctionType().toLowerCase(), function);
+        String originalID = function.getFunctionType().toLowerCase();
+        functionExecutors.put(originalID, function);
+        if(originalID.startsWith("minecraft:")){
+            String shortenedID = originalID.substring(10);
+            functionExecutors.put(shortenedID, function);
+        }
     }
 
     public void registerEntryType(String id, Class<? extends TableEntry> entryType){
