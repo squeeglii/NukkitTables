@@ -22,7 +22,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     protected String name;
     protected TableFunction[] functions;
 
-    protected TableEntryItem(){ }
+    public TableEntryItem(){ }
     public TableEntryItem(String type, String id, int weight, int quality, TableFunction[] functions, TableCondition... conditions) {
         super(type, weight, quality, conditions);
         this.name = id;
@@ -31,6 +31,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
     @Override
     protected Optional<Item> rollEntryItems(TableRollContext context) {
+        if(type == null) return Optional.empty();
         Optional<Item> it = getItem();
         if(it.isPresent()){
             Item item = Utility.applyFunctions(functions, it.get(), context);
