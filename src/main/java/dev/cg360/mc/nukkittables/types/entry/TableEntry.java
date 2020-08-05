@@ -11,6 +11,7 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.types.TableCondition;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 public abstract class TableEntry {
@@ -94,4 +95,15 @@ public abstract class TableEntry {
 
     public void setBaseWeight(int weight) { this.weight = weight; }
     public void setQuality(int quality) { this.quality = quality; }
+
+    @Override
+    public String toString() {
+        return "TableEntry{" +
+                "DEFAULT_LUCK=" + DEFAULT_LUCK +
+                ", type='" + type + '\'' +
+                ", conditions=" + Arrays.toString(conditions) +
+                ", weight=" + weight +
+                ", quality=" + quality +
+                '}';
+    }
 }

@@ -189,4 +189,12 @@ public class LootTable {
 
     public String getType() { return type; }
     public TablePool[] getPools() { return pools; }
+
+    @Override
+    public String toString() {
+        return "LootTable{" +
+                "type='" + type + '\'' +
+                ", pools=" + Arrays.toString(pools) +
+                '}';
+    }
 }

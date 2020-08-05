@@ -40,4 +40,12 @@ public final class TableCondition {
 
     public String getCondition() { return condition; }
     public JsonObject getData() { return data; }
+
+    @Override
+    public String toString() {
+        return "TableCondition{" +
+                "condition='" + condition + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

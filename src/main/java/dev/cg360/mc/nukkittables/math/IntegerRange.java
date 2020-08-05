@@ -42,4 +42,12 @@ public class IntegerRange {
             this.max = max;
         }
     }
+
+    @Override
+    public String toString() {
+        return "IntegerRange{" +
+                "min=" + min +
+                ", max=" + max +
+                '}';
+    }
 }

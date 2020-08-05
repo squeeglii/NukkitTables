@@ -11,6 +11,7 @@ import dev.cg360.mc.nukkittables.math.IntegerRange;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -138,4 +139,17 @@ public final class TablePool {
     public FloatRange getBonusRolls() { return variableBonusRolls == null ? new FloatRange(fixedBonusRolls, fixedBonusRolls) : variableBonusRolls; }
 
     public TableEntry[] getEntries() { return entries; }
+
+    @Override
+    public String toString() {
+        return "TablePool{" +
+                "conditions=" + Arrays.toString(conditions) +
+                ", functions=" + Arrays.toString(functions) +
+                ", fixedRolls=" + fixedRolls +
+                ", variableRolls=" + variableRolls +
+                ", fixedBonusRolls=" + fixedBonusRolls +
+                ", variableBonusRolls=" + variableBonusRolls +
+                ", entries=" + Arrays.toString(entries) +
+                '}';
+    }
 }

@@ -12,6 +12,7 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class TableFunction {
@@ -59,4 +60,13 @@ public class TableFunction {
     public String getFunctionType() { return function; }
     public TableCondition[] getConditions() { return conditions; }
     public JsonObject getData() { return data; }
+
+    @Override
+    public String toString() {
+        return "TableFunction{" +
+                "function='" + function + '\'' +
+                ", conditions=" + Arrays.toString(conditions) +
+                ", data=" + data +
+                '}';
+    }
 }

@@ -14,6 +14,7 @@ import dev.cg360.mc.nukkittables.types.TableCondition;
 import dev.cg360.mc.nukkittables.types.TableFunction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class TableEntryItem extends TableEntry implements NamedTableEntry {
@@ -83,4 +84,17 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     @Override
     public String getName() { return name; }
     public TableFunction[] getFunctions() { return functions; }
+
+    @Override
+    public String toString() {
+        return "TableEntryItem{" +
+                "name='" + name + '\'' +
+                ", functions=" + Arrays.toString(functions) +
+                ", DEFAULT_LUCK=" + DEFAULT_LUCK +
+                ", type='" + type + '\'' +
+                ", conditions=" + Arrays.toString(conditions) +
+                ", weight=" + weight +
+                ", quality=" + quality +
+                '}';
+    }
 }

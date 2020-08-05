@@ -42,4 +42,12 @@ public class FloatRange {
             this.max = max;
         }
     }
+
+    @Override
+    public String toString() {
+        return "FloatRange{" +
+                "min=" + min +
+                ", max=" + max +
+                '}';
+    }
 }
