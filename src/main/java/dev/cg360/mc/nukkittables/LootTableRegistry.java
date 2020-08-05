@@ -12,6 +12,7 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.types.TablePool;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
+import dev.cg360.mc.nukkittables.types.entry.TableEntryItem;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -61,6 +62,10 @@ public class LootTableRegistry {
 
         // nukkit namespace
         this.registerFunctionExecutor(new FunctionExecutorSetMeta());
+    }
+
+    public void registerDefaultTypes(){
+        this.registerEntryType("item", TableEntryItem.class);
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
@@ -117,8 +122,8 @@ public class LootTableRegistry {
         functionExecutors.put(function.getFunctionType().toLowerCase(), function);
     }
 
-    public void registerEntryType(TableEntry entryType){
-        entryTypes.put(entryType.getType().toLowerCase(), entryType.getClass());
+    public void registerEntryType(String id, Class<? extends TableEntry> entryType){
+        entryTypes.put(id.toLowerCase(), entryType);
     }
 
     public Optional<TableConditionExecutor> getConditionExecutor(String id){ return Optional.ofNullable(conditionExecutors.get(id.toLowerCase())); }
