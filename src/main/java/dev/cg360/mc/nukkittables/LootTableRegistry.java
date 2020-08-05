@@ -100,7 +100,7 @@ public class LootTableRegistry {
             while (i.hasNext()){
                 finalStr = finalStr.concat(i.next());
             }
-            return registerLootTableFromString(name.toLowerCase().substring((name.startsWith("/") ? 1 : 0), name.length() - 6), finalStr);
+            return registerLootTableFromString(name.toLowerCase().substring(0, name.length() - 6), finalStr);
         }
         return false;
     }
@@ -108,7 +108,7 @@ public class LootTableRegistry {
     public boolean registerLootTableFromString(String name, String jsonData) {
         Optional<LootTable> pt = LootTable.createLootTableFromString(jsonData);
         if(pt.isPresent()){
-            lootTables.put(name.toLowerCase().trim(), pt.get());
+            lootTables.put(name.toLowerCase().trim().substring((name.startsWith("/") ? 1 : 0)), pt.get());
             return true;
         }
         return false;
