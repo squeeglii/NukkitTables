@@ -100,7 +100,7 @@ public class LootTableRegistry {
             while (i.hasNext()){
                 finalStr = finalStr.concat(i.next());
             }
-            return registerLootTableFromString(name.toLowerCase().substring(0, name.length() - 6), finalStr);
+            return registerLootTableFromString(name.toLowerCase().substring(0, name.length() - 5), finalStr);
         }
         return false;
     }
