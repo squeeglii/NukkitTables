@@ -15,3 +15,8 @@ repositories {
 dependencies {
     implementation 'cn.nukkit:nukkit:1.0-SNAPSHOT'
 }
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
