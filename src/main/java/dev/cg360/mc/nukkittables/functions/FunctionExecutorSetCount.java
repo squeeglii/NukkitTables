@@ -31,11 +31,14 @@ public class FunctionExecutorSetCount extends TableFunctionExecutor {
             if(t instanceof JsonPrimitive){
                 String type = t.getAsString().toLowerCase();
                 switch (type){
-                    case "uniform":
-                        return getAsUniform(data);
                     case "binomial":
                         return getAsBinomial(data);
+                    default:
+                    case "uniform":
+                        return getAsUniform(data);
                 }
+            } else {
+                return getAsUniform(data);
             }
         }
         return Optional.empty();
