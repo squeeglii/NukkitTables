@@ -32,13 +32,13 @@ public class FunctionExecutorSetCount extends TableFunctionExecutor {
                 String type = t.getAsString().toLowerCase();
                 switch (type){
                     case "binomial":
-                        return getAsBinomial(data);
+                        return getAsBinomial(c);
                     default:
                     case "uniform":
-                        return getAsUniform(data);
+                        return getAsUniform(c);
                 }
             } else {
-                return getAsUniform(data);
+                return getAsUniform(c);
             }
         }
         return Optional.empty();
