@@ -66,7 +66,7 @@ public class LootTableRegistry {
     }
 
     public void registerDefaultTypes(){
-        this.registerEntryType("item", TableEntryItem.class);
+        this.registerEntryType("minecraft:item", TableEntryItem.class);
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
@@ -134,7 +134,12 @@ public class LootTableRegistry {
     }
 
     public void registerEntryType(String id, Class<? extends TableEntry> entryType){
-        entryTypes.put(id.toLowerCase(), entryType);
+        String originalID = id.toLowerCase();
+        entryTypes.put(originalID, entryType);
+        if(originalID.startsWith("minecraft:")){
+            String shortenedID = originalID.substring(10);
+            entryTypes.put(shortenedID, entryType);
+        }
     }
 
     public Optional<TableConditionExecutor> getConditionExecutor(String id){ return Optional.ofNullable(conditionExecutors.get(id.toLowerCase())); }
