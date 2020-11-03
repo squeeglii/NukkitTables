@@ -1,5 +1,6 @@
 package dev.cg360.mc.nukkittables;
 
+import cn.nukkit.Server;
 import cn.nukkit.item.Item;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,6 +12,7 @@ import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.types.TableCondition;
 import dev.cg360.mc.nukkittables.types.TableFunction;
+import dev.cg360.mc.nukkittables.types.entry.TableEntry;
 
 import java.util.Optional;
 import java.util.Random;
@@ -43,6 +45,32 @@ public class Utility {
                 int max = maximum.getAsInt();
 
                 return Optional.of(new IntegerRange(min, max));
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<TableEntry> parseEntry(JsonObject entryObject){
+        JsonElement typeElement = entryObject.get("type");
+
+        if (typeElement instanceof JsonPrimitive){
+            JsonPrimitive typePrimitive = (JsonPrimitive) typeElement;
+
+            if(typePrimitive.isString()){
+                String entryType = typePrimitive.getAsString();
+                Optional<Class<? extends TableEntry>> pc = LootTableRegistry.get().getEntryTypeClass(entryType.toLowerCase().trim());
+
+                if(pc.isPresent()){
+                    Class<? extends TableEntry> entryClass = pc.get();
+                    try{
+                        TableEntry e = entryClass.newInstance();
+                        if(e.loadPropertiesFromJson(entryObject)) return Optional.of(e);
+
+                    } catch (Exception err){
+                        Server.getInstance().getLogger().warning(String.format("Error loading type [%s] in a lootTable. Badly coded? Skipping entry.", entryType));
+                        err.printStackTrace();
+                    }
+                }
             }
         }
         return Optional.empty();
