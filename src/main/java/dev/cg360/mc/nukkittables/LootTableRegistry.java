@@ -12,6 +12,7 @@ import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.types.TablePool;
 import dev.cg360.mc.nukkittables.types.entry.TableEntry;
+import dev.cg360.mc.nukkittables.types.entry.TableEntryGroup;
 import dev.cg360.mc.nukkittables.types.entry.TableEntryItem;
 
 import java.io.BufferedReader;
@@ -67,6 +68,7 @@ public class LootTableRegistry {
 
     public void registerDefaultTypes(){
         this.registerEntryType("minecraft:item", TableEntryItem.class);
+        this.registerEntryType("minecraft:group", TableEntryGroup.class);
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
