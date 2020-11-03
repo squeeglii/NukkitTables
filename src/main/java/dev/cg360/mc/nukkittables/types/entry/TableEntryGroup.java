@@ -27,8 +27,9 @@ public class TableEntryGroup extends TableEntry implements ParentTableEntry {
 
     @Override
     protected ArrayList<Item> rollEntryItems(TableRollContext context) {
-
-        return item;
+        ArrayList<Item> collectedItems = new ArrayList<>();
+        for(TableEntry entry: children) collectedItems.addAll(entry.rollEntry(context));
+        return collectedItems;
     }
 
     @Override
