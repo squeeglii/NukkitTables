@@ -38,7 +38,13 @@ public abstract class TableEntry {
     }
 
     public final Optional<Item> rollEntry(TableRollContext context){
-        return Utility.compileConditions(conditions, context) ? rollEntryItems(context) : Optional.empty();
+        if(Utility.compileConditions(conditions, context)){
+            Optional<Item> items = rollEntryItems(context);
+            if(items.isPresent()) {
+                return Optional.of(Utility.applyFunctions(functions, items.get(), context));
+            }
+        }
+        return Optional.empty();
     }
 
     protected abstract Optional<Item> rollEntryItems(TableRollContext context);

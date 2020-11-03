@@ -30,12 +30,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     @Override
     protected Optional<Item> rollEntryItems(TableRollContext context) {
         if(type == null) return Optional.empty();
-        Optional<Item> it = getItem();
-        if(it.isPresent()){
-            Item item = Utility.applyFunctions(functions, it.get(), context);
-            return Optional.of(item);
-        }
-        return Optional.empty();
+        return getItem();
     }
 
     private Optional<Item> getItem(){
