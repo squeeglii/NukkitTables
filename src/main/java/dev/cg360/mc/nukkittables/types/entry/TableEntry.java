@@ -103,6 +103,7 @@ public abstract class TableEntry {
 
     public String getType() { return type; }
     public TableCondition[] getConditions() { return conditions; }
+    public TableFunction[] getFunctions() { return functions; }
     public int getBaseWeight() { return weight; }
     public int getQuality() { return quality; }
 
@@ -120,6 +121,7 @@ public abstract class TableEntry {
                 "DEFAULT_LUCK=" + DEFAULT_LUCK +
                 ", type='" + type + '\'' +
                 ", conditions=" + Arrays.toString(conditions) +
+                ", functions=" + Arrays.toString(functions) +
                 ", weight=" + weight +
                 ", quality=" + quality +
                 '}';
