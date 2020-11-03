@@ -39,7 +39,7 @@ public abstract class TableEntry {
 
     public final ArrayList<Item> rollEntry(TableRollContext context){
         if(Utility.compileConditions(conditions, context)){
-            ArrayList<Item> items = rollEntryItems(context);
+            ArrayList<Item> items = gatherEntryItems(context);
             ArrayList<Item> newItems = new ArrayList<>();
             for(Item item: items){
                 newItems.add(Utility.applyFunctions(functions, item, context));
@@ -49,7 +49,7 @@ public abstract class TableEntry {
         return new ArrayList<>();
     }
 
-    protected abstract ArrayList<Item> rollEntryItems(TableRollContext context);
+    public abstract ArrayList<Item> gatherEntryItems(TableRollContext context);
 
     public final boolean loadPropertiesFromJson(JsonObject entryObject){
         JsonElement elementType = entryObject.get("type");

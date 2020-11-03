@@ -28,7 +28,7 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     }
 
     @Override
-    protected ArrayList<Item> rollEntryItems(TableRollContext context) {
+    public ArrayList<Item> gatherEntryItems(TableRollContext context) {
         if(name == null) return new ArrayList<>();
         ArrayList<Item> item = new ArrayList<>();
         getItem().ifPresent(item::add);
