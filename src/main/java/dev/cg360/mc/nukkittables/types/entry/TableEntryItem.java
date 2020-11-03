@@ -59,28 +59,31 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
         JsonElement nameElement = object.get("name");
         JsonElement functionsElement = object.get("functions");
 
-        if(functionsElement instanceof JsonArray) {
-            JsonArray functionsArray = (JsonArray) functionsElement;
-
-            ArrayList<TableFunction> funcs = new ArrayList<>();
-            for(JsonElement f: functionsArray){
-                if(f.isJsonObject()){
-                    JsonObject func = (JsonObject) f;
-                    TableFunction.loadFromJsonObject(func).ifPresent(funcs::add);
-                }
-            }
-
-            this.functions = funcs.toArray(new TableFunction[0]);
-        } else {
-            this.functions = new TableFunction[0];
-        }
-
 
         if(nameElement instanceof JsonPrimitive){
             JsonPrimitive namePrimitive = (JsonPrimitive) nameElement;
 
             if(!(namePrimitive.isNumber() || namePrimitive.isString())) return false;
             this.name = namePrimitive.getAsString();
+
+
+            if(functionsElement instanceof JsonArray) {
+                JsonArray functionsArray = (JsonArray) functionsElement;
+
+                ArrayList<TableFunction> funcs = new ArrayList<>();
+                for(JsonElement f: functionsArray){
+                    if(f.isJsonObject()){
+                        JsonObject func = (JsonObject) f;
+                        TableFunction.loadFromJsonObject(func).ifPresent(funcs::add);
+                    }
+                }
+
+                this.functions = funcs.toArray(new TableFunction[0]);
+            } else {
+                this.functions = new TableFunction[0];
+            }
+
+
             return true;
         }
 
