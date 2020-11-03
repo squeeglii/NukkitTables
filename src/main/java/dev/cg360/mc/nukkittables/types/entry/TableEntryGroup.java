@@ -62,7 +62,7 @@ public class TableEntryGroup extends TableEntry implements ParentTableEntry {
 
     @Override
     public String toString() {
-        return "TableEntryItem{" +
+        return "TableEntryGroup{" +
                 "children='" + Arrays.toString(children) + '\'' +
                 ", DEFAULT_LUCK=" + DEFAULT_LUCK +
                 ", type='" + type + '\'' +
