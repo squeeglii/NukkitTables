@@ -37,17 +37,19 @@ public abstract class TableEntry {
         this.quality = quality;
     }
 
-    public final Optional<Item> rollEntry(TableRollContext context){
+    public final ArrayList<Item> rollEntry(TableRollContext context){
         if(Utility.compileConditions(conditions, context)){
-            Optional<Item> items = rollEntryItems(context);
-            if(items.isPresent()) {
-                return Optional.of(Utility.applyFunctions(functions, items.get(), context));
+            ArrayList<Item> items = rollEntryItems(context);
+            ArrayList<Item> newItems = new ArrayList<>();
+            for(Item item: items){
+                newItems.add(Utility.applyFunctions(functions, item, context));
             }
+            return newItems;
         }
-        return Optional.empty();
+        return new ArrayList<>();
     }
 
-    protected abstract Optional<Item> rollEntryItems(TableRollContext context);
+    protected abstract ArrayList<Item> rollEntryItems(TableRollContext context);
 
     public final boolean loadPropertiesFromJson(JsonObject entryObject){
         JsonElement elementType = entryObject.get("type");

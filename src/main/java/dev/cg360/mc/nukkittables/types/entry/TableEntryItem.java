@@ -28,9 +28,11 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     }
 
     @Override
-    protected Optional<Item> rollEntryItems(TableRollContext context) {
-        if(type == null) return Optional.empty();
-        return getItem();
+    protected ArrayList<Item> rollEntryItems(TableRollContext context) {
+        if(name == null) return new ArrayList<>();
+        ArrayList<Item> item = new ArrayList<>();
+        getItem().ifPresent(item::add);
+        return item;
     }
 
     private Optional<Item> getItem(){
