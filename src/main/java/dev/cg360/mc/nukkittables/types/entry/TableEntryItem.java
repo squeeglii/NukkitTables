@@ -20,13 +20,11 @@ import java.util.Optional;
 public class TableEntryItem extends TableEntry implements NamedTableEntry {
 
     protected String name;
-    protected TableFunction[] functions;
 
     public TableEntryItem(){ }
-    public TableEntryItem(String type, String id, int weight, int quality, TableFunction[] functions, TableCondition... conditions) {
-        super(type, weight, quality, conditions);
+    public TableEntryItem(String type, String id, int weight, int quality, TableCondition[] conditions, TableFunction[] functions) {
+        super(type, weight, quality, conditions, functions);
         this.name = id;
-        this.functions = functions;
     }
 
     @Override
@@ -57,29 +55,13 @@ public class TableEntryItem extends TableEntry implements NamedTableEntry {
     @Override
     protected boolean loadCustomPropertiesFromJson(JsonObject object) {
         JsonElement nameElement = object.get("name");
-        JsonElement functionsElement = object.get("functions");
 
 
         if(nameElement instanceof JsonPrimitive){
             JsonPrimitive namePrimitive = (JsonPrimitive) nameElement;
 
             if(!(namePrimitive.isNumber() || namePrimitive.isString())) return false;
-
-            ArrayList<TableFunction> funcs = new ArrayList<>();
-
-            if(functionsElement instanceof JsonArray) {
-                JsonArray functionsArray = (JsonArray) functionsElement;
-
-                for(JsonElement f: functionsArray){
-                    if(f.isJsonObject()){
-                        JsonObject func = (JsonObject) f;
-                        TableFunction.loadFromJsonObject(func).ifPresent(funcs::add);
-                    }
-                }
-            }
-
             this.name = namePrimitive.getAsString();
-            this.functions = funcs.toArray(new TableFunction[0]);
 
             return true;
         }

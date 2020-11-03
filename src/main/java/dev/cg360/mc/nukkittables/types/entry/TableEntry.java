@@ -9,6 +9,7 @@ import dev.cg360.mc.nukkittables.Utility;
 import dev.cg360.mc.nukkittables.context.TableRollContext;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.types.TableCondition;
+import dev.cg360.mc.nukkittables.types.TableFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,15 +22,17 @@ public abstract class TableEntry {
     protected String type;
 
     protected TableCondition[] conditions;
+    protected TableFunction[] functions;
 
     protected int weight;
     protected int quality;
 
     protected TableEntry() { }
-    public TableEntry(String type, int weight, TableCondition... conditions){ this(type, weight, 1, conditions); }
-    public TableEntry(String type, int weight, int quality, TableCondition... conditions) {
+    public TableEntry(String type, int weight, TableCondition[] conditions, TableFunction[] functions){ this(type, weight, 1, conditions, functions); }
+    public TableEntry(String type, int weight, int quality, TableCondition[] conditions, TableFunction[] functions) {
         this.type = type.toLowerCase();
         this.conditions = conditions;
+        this.functions = functions;
         this.weight = weight;
         this.quality = quality;
     }
@@ -43,6 +46,7 @@ public abstract class TableEntry {
     public final boolean loadPropertiesFromJson(JsonObject entryObject){
         JsonElement elementType = entryObject.get("type");
         JsonElement elementConditions = entryObject.get("conditions");
+        JsonElement functionsElement = entryObject.get("functions");
         JsonElement elementWeight = entryObject.get("weight");
         JsonElement elementQuality = entryObject.get("quality");
 
@@ -63,6 +67,19 @@ public abstract class TableEntry {
                     }
                 }
 
+                ArrayList<TableFunction> funcs = new ArrayList<>();
+
+                if(functionsElement instanceof JsonArray) {
+                    JsonArray functionsArray = (JsonArray) functionsElement;
+
+                    for(JsonElement f: functionsArray){
+                        if(f.isJsonObject()){
+                            JsonObject func = (JsonObject) f;
+                            TableFunction.loadFromJsonObject(func).ifPresent(funcs::add);
+                        }
+                    }
+                }
+
                 if(elementQuality instanceof JsonPrimitive){
                     JsonPrimitive primitiveQuality = (JsonPrimitive) elementQuality;
                     if(primitiveQuality.isNumber()){
@@ -72,6 +89,7 @@ public abstract class TableEntry {
 
                 this.type = elementType.getAsString().toLowerCase();
                 this.conditions = approvedConditions.toArray(new TableCondition[0]);
+                this.functions = funcs.toArray(new TableFunction[0]);
                 this.weight = primitiveWeight.getAsNumber().intValue();
                 this.quality = q;
 
