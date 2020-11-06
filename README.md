@@ -26,7 +26,10 @@ goal.
 
 ## Compatibility:
 
+**Server Support:** _Nukkit (Made with API 1.0.9)_
+
 **Target:** _Java 1.16 Coverage_
+
 **Last Reviewed:** _6th November 2020_
 
 |System|Feature|Compatible?|Since|Notes|
