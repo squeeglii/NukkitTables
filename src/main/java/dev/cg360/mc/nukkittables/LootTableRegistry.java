@@ -69,6 +69,7 @@ public class LootTableRegistry {
         this.registerEntryType("minecraft:group", TableEntryGroup.class);
         this.registerEntryType("minecraft:alternatives", TableEntryAlternatives.class);
         this.registerEntryType("minecraft:sequence", TableEntrySequence.class);
+        this.registerEntryType("minecraft:empty", TableEntryEmpty.class);
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
