@@ -1,3 +1,29 @@
+![NukkitTables Logo](./Logo.png)
+
+## Project Overview
+
+The aim of the NukkitTables Project is to provide LootTable support to Cloudburst's Nukkit project (and potentially Cloudbust Server once 
+more functions and conditions are compatible) sharing parity with **Minecraft Java 1.16.** Currently, this project is in **Alpha** meaning
+all the intended features (anything currently possible in Nukkit without too many new systems) are not yet implemented. As soon as
+they are implemented, the project will be released.
+
+I originally created this project for Skywars on the Mooncraft Games Bedrock server:
+https://github.com/Mooncraft-Games
+
+However, that doesn't mean I'm going to stop maintaining it once it has everything the server needs. Full compatibility is the long term 
+goal.
+
+## Sources during development.
+
+- [Loot Tables wiki](https://minecraft.gamepedia.com/Loot_table)
+  - Useful early on in development, it gives all the details necassary to start implementations of functions and *certain entries.*
+- [Predicates wiki](https://minecraft.gamepedia.com/Predicate)
+  - Useful resource for all conditions, just like the loot table wiki.
+- [1.14 LootTable Guide/Changelog](https://gist.github.com/misode/66456e57372ce62cd9b65d1052521069)
+  - Helped me understand loot tables much better. Groups had me stumped with my previous understanding but then I read this. So much 
+  clearer than anything the wiki offered.
+
+
 ## Compatibility:
 
 **Target:** _Java 1.16 Coverage_
