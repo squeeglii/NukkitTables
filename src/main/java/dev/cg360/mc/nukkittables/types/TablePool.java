@@ -66,7 +66,7 @@ public final class TablePool {
         this.entries = entries;
     }
 
-    protected Optional<Item> rollPoolOnce(TableRollContext context, int maxWeight, ArrayList<TableEntry> passedEntries){
+    protected ArrayList<Item> rollPoolOnce(TableRollContext context, int maxWeight, ArrayList<TableEntry> passedEntries){
         int selection = maxWeight > 0 ? new Random().nextInt(maxWeight) : 0;
         int cumulativeWeightChecked = 1;
         for(TableEntry entry: passedEntries){
@@ -76,7 +76,7 @@ public final class TablePool {
             }
             cumulativeWeightChecked += entry.getModifiedWeight();
         }
-        return Optional.empty();
+        return new ArrayList<>();
     }
 
     public Item[] rollPool(TableRollContext context){
@@ -87,15 +87,16 @@ public final class TablePool {
 
             if(passedEntries.size() > 0) {
                 int rollAmount = getRandomRolls(0); //TODO: Get luck from context.
-                ArrayList<Item> items = new ArrayList<>();
+                ArrayList<Item> fullitems = new ArrayList<>();
 
                 for (int i = 0; i < rollAmount; i++) {
-                    rollPoolOnce(context, maxWeight, passedEntries).ifPresent(item -> {
+                    ArrayList<Item> items = rollPoolOnce(context, maxWeight, passedEntries);
+                    for(Item item: items){
                         Item finalItem = Utility.applyFunctions(functions, item, context);
-                        items.add(finalItem);
-                    });
+                        fullitems.add(finalItem);
+                    }
                 }
-                return items.toArray(new Item[0]);
+                return fullitems.toArray(new Item[0]);
             }
         }
         return new Item[0];

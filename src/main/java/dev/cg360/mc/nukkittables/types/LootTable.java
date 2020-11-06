@@ -63,28 +63,7 @@ public class LootTable {
                             for(JsonElement entryElement: entriesArray){
                                 if(entryElement instanceof JsonObject){
                                     JsonObject entryObject = (JsonObject) entryElement;
-                                    JsonElement typeElement = entryObject.get("type");
-
-                                    if (typeElement instanceof JsonPrimitive){
-                                        JsonPrimitive typePrimitive = (JsonPrimitive) typeElement;
-
-                                        if(typePrimitive.isString()){
-                                            String entryType = typePrimitive.getAsString();
-                                            Optional<Class<? extends TableEntry>> pc = LootTableRegistry.get().getEntryTypeClass(entryType.toLowerCase().trim());
-
-                                            if(pc.isPresent()){
-                                                Class<? extends TableEntry> entryClass = pc.get();
-                                                try{
-                                                    TableEntry e = entryClass.newInstance();
-                                                    if(e.loadPropertiesFromJson(entryObject)) entries.add(e);
-
-                                                } catch (Exception err){
-                                                    Server.getInstance().getLogger().warning(String.format("Error loading type [%s] in a lootTable. Badly coded? Skipping entry.", entryType));
-                                                    err.printStackTrace();
-                                                }
-                                            }
-                                        }
-                                    }
+                                    Utility.parseEntry(entryObject).ifPresent(entries::add);
                                 }
                             }
 

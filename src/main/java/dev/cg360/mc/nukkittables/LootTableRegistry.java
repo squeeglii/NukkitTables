@@ -11,8 +11,7 @@ import dev.cg360.mc.nukkittables.types.LootTable;
 import dev.cg360.mc.nukkittables.executors.TableConditionExecutor;
 import dev.cg360.mc.nukkittables.executors.TableFunctionExecutor;
 import dev.cg360.mc.nukkittables.types.TablePool;
-import dev.cg360.mc.nukkittables.types.entry.TableEntry;
-import dev.cg360.mc.nukkittables.types.entry.TableEntryItem;
+import dev.cg360.mc.nukkittables.types.entry.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +25,8 @@ import java.util.Optional;
 public class LootTableRegistry {
 
     public static final LootTableRegistry INSTANCE = new LootTableRegistry();
+
+    public static final Class<? extends TableEntry> FALLBACK_ENTRY = TableEntryEmpty.class;
 
     protected HashMap<String, TableConditionExecutor> conditionExecutors;
     protected HashMap<String, TableFunctionExecutor> functionExecutors;
@@ -67,6 +68,10 @@ public class LootTableRegistry {
 
     public void registerDefaultTypes(){
         this.registerEntryType("minecraft:item", TableEntryItem.class);
+        this.registerEntryType("minecraft:group", TableEntryGroup.class);
+        this.registerEntryType("minecraft:alternatives", TableEntryAlternatives.class);
+        this.registerEntryType("minecraft:sequence", TableEntrySequence.class);
+        this.registerEntryType("minecraft:empty", TableEntryEmpty.class);
     }
 
     public void loadAllLootTablesFromStorage(String name, boolean includeSubfolders){
