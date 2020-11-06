@@ -26,6 +26,8 @@ public class LootTableRegistry {
 
     public static final LootTableRegistry INSTANCE = new LootTableRegistry();
 
+    public static final Class<? extends TableEntry> FALLBACK_ENTRY = TableEntryEmpty.class;
+
     protected HashMap<String, TableConditionExecutor> conditionExecutors;
     protected HashMap<String, TableFunctionExecutor> functionExecutors;
     protected HashMap<String, Class<? extends TableEntry>> entryTypes;

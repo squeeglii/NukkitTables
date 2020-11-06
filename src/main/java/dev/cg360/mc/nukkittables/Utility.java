@@ -73,7 +73,15 @@ public class Utility {
                 }
             }
         }
-        return Optional.empty();
+
+        // Incase someone messes up the fallback. Might simplify away from Optional
+        try {
+            return Optional.of(LootTableRegistry.FALLBACK_ENTRY.newInstance());
+        } catch (Exception err){
+            Server.getInstance().getLogger().error("!! Error instantiating fallback type !!");
+            err.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     public static Optional<FloatRange> getFloatRangeFromData(JsonObject data){

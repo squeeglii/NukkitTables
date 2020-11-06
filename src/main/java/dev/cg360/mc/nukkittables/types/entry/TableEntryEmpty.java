@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class TableEntryEmpty extends TableEntry {
+public final class TableEntryEmpty extends TableEntry {
 
     public TableEntryEmpty(){ }
     public TableEntryEmpty(String type, int weight, int quality, TableCondition[] conditions, TableFunction[] functions) {
