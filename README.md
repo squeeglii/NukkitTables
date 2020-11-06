@@ -1,5 +1,10 @@
 ![NukkitTables Logo](./Logo.png)
 
+[![Lastest Version](https://img.shields.io/badge/Latest-1.0:_Alpha_1-magenta?style=for-the-badge)](./README.md)
+[![License](https://img.shields.io/badge/License-GPL--3.0-orange?style=for-the-badge)](./README.md)
+[![Nukkit](https://img.shields.io/badge/Nukkit-1.0.9-red?style=for-the-badge)](https://github.com/CloudburstMC/Nukkit)
+![GitHub repo size](https://img.shields.io/github/repo-size/CloudGamer360/NukkitTables?style=for-the-badge)
+
 ## Project Overview
 
 The aim of the NukkitTables Project is to provide LootTable support to Cloudburst's Nukkit project (and potentially Cloudbust Server once 
