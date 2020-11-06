@@ -60,6 +60,6 @@
 ## Custom Features:
 
 |System|Feature|Since|Notes|
-|---|---|---|---|---|
+|---|---|---|---|
 |Function|nukkit:set_meta|Pre-Alpha|Will be removed if meta is transitioned out.|
 |Condition|nukkit:plugin_enabled|Pre-Alpha|Might change namespace to modded as it could be universal.|
